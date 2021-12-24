@@ -2,6 +2,7 @@ package com.example.dairyproductscompanyapp
 
 import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -9,7 +10,9 @@ import com.example.dairyproductscompanyapp.databinding.FragmentListBinding
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
+import com.google.android.gms.auth.api.Auth
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -64,6 +67,8 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+val auth = Firebase.auth
+        Log.e("TAG","user:${auth.currentUser?.uid}")
 
     }
 
@@ -75,6 +80,9 @@ class ListFragment : Fragment() {
         when (item.itemId) {
             R.id.sign_in -> {
                 signInLauncher.launch(signInIntent)
+
+
+
             }
             R.id.sign_out -> {
                 AuthUI.getInstance()
