@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.dairyproductscompanyapp.databinding.FragmentListBinding
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
@@ -68,7 +69,10 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 val auth = Firebase.auth
-        Log.e("TAG","user:${auth.currentUser?.uid}")
+        Log.e("TAG","user:${auth.currentUser?.displayName}")
+        binding?.addButton?.setOnClickListener {
+            findNavController().navigate(R.id.action_listFragment_to_addFragment)
+        }
 
     }
 

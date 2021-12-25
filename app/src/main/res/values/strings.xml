@@ -5,4 +5,8 @@
     <string name="sign_in">sign in</string>
     <string name="login">login</string>
     <string name="sign_out">Sign out</string>
+    <string name="name_company">Name Company</string>
+    <string name="phone_number">phone Number</string>
+    <string name="add_product">Add Product</string>
+    <string name="save">Save</string>
 </resources>
