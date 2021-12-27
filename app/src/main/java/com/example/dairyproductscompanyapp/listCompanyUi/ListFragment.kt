@@ -1,19 +1,17 @@
-package com.example.dairyproductscompanyapp
+package com.example.dairyproductscompanyapp.listCompanyUi
 
 import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.dairyproductscompanyapp.R
 import com.example.dairyproductscompanyapp.databinding.FragmentListBinding
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
-import com.google.android.gms.auth.api.Auth
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -52,6 +50,14 @@ class ListFragment : Fragment() {
         }
     }
 
+    private fun checkUserSignIn() {
+        if (!isSignIn) {
+            findNavController().navigate(R.id.action_listFragment_to_addFragment)
+        } else {
+            Toast.makeText(requireContext(), "You not sign in", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -68,10 +74,10 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-val auth = Firebase.auth
-        Log.e("TAG","user:${auth.currentUser?.displayName}")
+        binding?.recyclerView?.adapter = CompanyListAdapter()
+        val auth = Firebase.auth
         binding?.addButton?.setOnClickListener {
-            findNavController().navigate(R.id.action_listFragment_to_addFragment)
+            checkUserSignIn()
         }
 
     }
@@ -86,7 +92,6 @@ val auth = Firebase.auth
                 signInLauncher.launch(signInIntent)
 
 
-
             }
             R.id.sign_out -> {
                 AuthUI.getInstance()
@@ -94,33 +99,33 @@ val auth = Firebase.auth
                     .addOnCompleteListener {
                         Toast.makeText(context, "LogOut", Toast.LENGTH_SHORT).show()
                     }
-                isSignIn=true
+                isSignIn = true
             }
         }
         return true
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
-        if (isSignIn){
-            menu.findItem(R.id.sign_in).isVisible=true
-            menu.findItem(R.id.sign_out).isVisible=false
-        }else{
-            menu.findItem(R.id.sign_out).isVisible=true
-            menu.findItem(R.id.sign_in).isVisible=false
+        if (isSignIn) {
+            menu.findItem(R.id.sign_in).isVisible = true
+            menu.findItem(R.id.sign_out).isVisible = false
+        } else {
+            menu.findItem(R.id.sign_out).isVisible = true
+            menu.findItem(R.id.sign_in).isVisible = false
         }
     }
 
     override fun onStart() {
         super.onStart()
         val currentUser = Firebase.auth.currentUser
-        if (currentUser!=null){
-            isSignIn=false
+        if (currentUser != null) {
+            isSignIn = false
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding=null
+        _binding = null
     }
 
 
