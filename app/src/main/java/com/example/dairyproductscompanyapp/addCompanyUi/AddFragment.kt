@@ -1,4 +1,4 @@
-package com.example.dairyproductscompanyapp
+package com.example.dairyproductscompanyapp.addCompanyUi
 
 import android.app.Activity
 import android.content.Intent
@@ -8,10 +8,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import com.example.dairyproductscompanyapp.FakeData
 import com.example.dairyproductscompanyapp.databinding.FragmentAddBinding
+import com.example.dairyproductscompanyapp.utils.ViewModelFactory
 
 
 class AddFragment : Fragment() {
+    private val viewModel:AddViewModel by  activityViewModels {
+        ViewModelFactory()
+    }
+
     private val REQUEST_CODE = 100
    private var _binding : FragmentAddBinding? = null
     private val binding get()=_binding
@@ -50,10 +57,25 @@ class AddFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding?.SaveProduct?.setOnClickListener {
+            addNewProduct()
+        }
+
         binding?.imageCompany?.setOnClickListener {
             openGalleryForImage()
 
         }
+    }
+    private fun addNewProduct(){
+        viewModel.addNewProduct(
+            binding?.editNameCompany?.text.toString(),
+            binding?.editPhoneNumber1?.text.toString() ,
+            binding?.imageCompany?.imageMatrix.toString(),
+            binding?.editNameProduct?.text.toString(),
+            binding?.price?.text.toString()
+
+
+        )
     }
 
     override fun onDestroy() {

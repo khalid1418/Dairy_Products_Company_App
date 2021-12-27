@@ -1,5 +1,11 @@
 package com.example.dairyproductscompanyapp.dataLayer
 
-class CompanyRepository(private val companyRemoteDataSource: CompanyRemoteDataSource) {
+import com.example.dairyproductscompanyapp.FakeData
+
+class CompanyRepository(
+    private val companyFireStoreDataSource: CompanyFireStoreDataSource,
+){
+suspend fun addProduct(product: FakeData)=
+    companyFireStoreDataSource.addProduct(product)
 
 }
