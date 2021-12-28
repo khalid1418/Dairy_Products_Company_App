@@ -6,13 +6,21 @@
     app:startDestination="@id/listFragment">
 
     <fragment
-        android:id="@+id/registrationFragment"
-        android:name="com.example.dairyproductscompanyapp.RegistrationFragment"
-        android:label="fragment_registration"
-        tools:layout="@layout/fragment_registration" />
-    <fragment
         android:id="@+id/listFragment"
-        android:name="com.example.dairyproductscompanyapp.ListFragment"
+        android:name="com.example.dairyproductscompanyapp.listCompanyUi.ListFragment"
         android:label="fragment_list"
-        tools:layout="@layout/fragment_list" />
+        tools:layout="@layout/fragment_list" >
+        <action
+            android:id="@+id/action_listFragment_to_addFragment"
+            app:destination="@id/addFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addFragment"
+        android:name="com.example.dairyproductscompanyapp.addCompanyUi.AddFragment"
+        android:label="fragment_add"
+        tools:layout="@layout/fragment_add" >
+        <action
+            android:id="@+id/action_addFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+    </fragment>
 </navigation>
