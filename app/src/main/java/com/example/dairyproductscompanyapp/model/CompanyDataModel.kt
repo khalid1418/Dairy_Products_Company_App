@@ -1,6 +1,6 @@
-package com.example.dairyproductscompanyapp
+package com.example.dairyproductscompanyapp.model
 
-data class FakeData(
+data class CompanyDataModel(
     val nameCompany:String ,
     val phone:Int ,
     val image:String,

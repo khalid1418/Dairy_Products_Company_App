@@ -53,6 +53,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_phone_number1"
             android:layout_width="match_parent"
+            android:phoneNumber="true"
             android:layout_height="match_parent" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -71,6 +72,7 @@
         android:id="@+id/price"
         android:layout_width="99dp"
         android:hint="Price"
+        android:numeric="integer"
         android:layout_height="60dp"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="300dp"

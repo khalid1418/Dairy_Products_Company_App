@@ -9,7 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import com.example.dairyproductscompanyapp.FakeData
+import androidx.navigation.fragment.findNavController
 import com.example.dairyproductscompanyapp.databinding.FragmentAddBinding
 import com.example.dairyproductscompanyapp.utils.ViewModelFactory
 
@@ -67,14 +67,27 @@ class AddFragment : Fragment() {
         }
     }
     private fun addNewProduct(){
+        if (isEntryValid()){
         viewModel.addNewProduct(
             binding?.editNameCompany?.text.toString(),
             binding?.editPhoneNumber1?.text.toString() ,
-            binding?.imageCompany?.imageMatrix.toString(),
+            binding?.imageCompany?.drawingTime.toString(),
             binding?.editNameProduct?.text.toString(),
             binding?.price?.text.toString()
 
 
+        )
+            val action = AddFragmentDirections.actionAddFragmentToListFragment()
+            findNavController().navigate(action)
+        }
+    }
+    private fun isEntryValid():Boolean{
+        return viewModel.isEntryValid(
+            binding?.editNameCompany?.text.toString(),
+            binding?.editPhoneNumber1?.text.toString(),
+            binding?.imageCompany?.context.toString(),
+            binding?.editNameProduct?.text.toString(),
+            binding?.price?.text.toString()
         )
     }
 

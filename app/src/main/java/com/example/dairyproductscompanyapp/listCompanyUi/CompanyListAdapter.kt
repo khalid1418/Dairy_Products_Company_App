@@ -5,19 +5,19 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dairyproductscompanyapp.FakeData
+import com.example.dairyproductscompanyapp.model.CompanyDataModel
 import com.example.dairyproductscompanyapp.databinding.CompanyListBinding
 
 class CompanyListAdapter :
-    ListAdapter<FakeData, CompanyListAdapter.CompanyViewHolder>(DiffCallback) {
+    ListAdapter<CompanyDataModel, CompanyListAdapter.CompanyViewHolder>(DiffCallback) {
 
     companion object {
-        private val DiffCallback = object : DiffUtil.ItemCallback<FakeData>() {
-            override fun areItemsTheSame(oldItem: FakeData, newItem: FakeData): Boolean {
+        private val DiffCallback = object : DiffUtil.ItemCallback<CompanyDataModel>() {
+            override fun areItemsTheSame(oldItem: CompanyDataModel, newItem: CompanyDataModel): Boolean {
                 return oldItem === newItem
             }
 
-            override fun areContentsTheSame(oldItem: FakeData, newItem: FakeData): Boolean {
+            override fun areContentsTheSame(oldItem: CompanyDataModel, newItem: CompanyDataModel): Boolean {
                 return oldItem.nameCompany == newItem.nameCompany
             }
 
@@ -26,10 +26,10 @@ class CompanyListAdapter :
 
     class CompanyViewHolder(private val binding: CompanyListBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: FakeData) {
+        fun bind(dataModel: CompanyDataModel) {
             binding.apply {
-                name.text = data.nameCompany
-                phone.text = data.phone.toString()
+                name.text = dataModel.nameCompany
+                phone.text = dataModel.phone.toString()
 
             }
 
