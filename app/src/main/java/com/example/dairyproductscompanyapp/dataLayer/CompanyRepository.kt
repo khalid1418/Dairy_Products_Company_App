@@ -8,6 +8,6 @@ class CompanyRepository(
 suspend fun addProduct(product: CompanyDataModel)=
     companyFireStoreDataSource.addProduct(product)
 
-    suspend fun retrieveCompany(company:CompanyDataModel) = companyFireStoreDataSource.retrieveCompany(company)
+    suspend fun retrieveCompany() = companyFireStoreDataSource.retrieveCompany()
 
 }

@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.dairyproductscompanyapp.R
 import com.example.dairyproductscompanyapp.databinding.FragmentListBinding
+import com.example.dairyproductscompanyapp.model.CompanyDataModel
 import com.example.dairyproductscompanyapp.utils.ViewModelFactory
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
@@ -80,7 +81,12 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.recyclerView?.adapter = CompanyListAdapter()
+//        var adapter = binding?.recyclerView?.adapter
+//        adapter = CompanyListAdapter()
+
+
+
+
         val auth = Firebase.auth
         binding?.addButton?.setOnClickListener {
             checkUserSignIn()
