@@ -5,7 +5,7 @@ import com.example.dairyproductscompanyapp.model.CompanyDataModel
 
 class RetrieveUseCase(private val retrieveRepository: CompanyRepository) {
 
-    suspend operator fun invoke(){
+    suspend operator fun invoke()=
         retrieveRepository.retrieveCompany()
-    }
+
 }

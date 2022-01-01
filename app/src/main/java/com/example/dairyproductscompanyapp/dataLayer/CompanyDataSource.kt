@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 interface CompanyDataSource {
 
     suspend fun addProduct(product: CompanyDataModel)
-    suspend fun retrieveCompany(): Flow<CompanyDataModel>
+    suspend fun retrieveCompanyData():Flow<CompanyDataModel>
 
 
 

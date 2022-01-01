@@ -11,7 +11,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.graphics.drawable.toIcon
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.dairyproductscompanyapp.databinding.FragmentAddBinding
 import com.example.dairyproductscompanyapp.utils.ViewModelFactory
@@ -20,7 +22,9 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.emptyFlow
+import kotlinx.coroutines.tasks.await
 import java.io.File
 import java.net.URL
 import java.util.*
@@ -34,7 +38,7 @@ class AddFragment : Fragment() {
     private val REQUEST_CODE = 100
    private var _binding : FragmentAddBinding? = null
     private val binding get()=_binding
-  private lateinit var  fileImage:Uri
+  lateinit var  fileImage:Uri
 
 
 
@@ -70,31 +74,47 @@ class AddFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.SaveProduct?.setOnClickListener {
-            addNewProduct()
-        }
-
         binding?.imageCompany?.setOnClickListener {
             openGalleryForImage()
 
         }
+
+        binding?.SaveProduct?.setOnClickListener {
+            addNewProduct()
+        }
+
+
     }
     private fun addNewProduct(){
-        if (isEntryValid()){
-        viewModel.addNewProduct(
-            binding?.editNameCompany?.text.toString(),
-            binding?.editPhoneNumber1?.text.toString() ,
-            binding?.editNameProduct?.text.toString(),
-            binding?.price?.text.toString(),
-            binding?.imageCompany.toString()
+        if (isEntryValid()) {
+//            upLoadImage()
+//            Log.e("TAG","idk:${fileImage}")
+//            val firestore = UUID.randomUUID().toString()
+//            val storageRef = FirebaseStorage.getInstance().getReference("/images/$firestore")
+//            storageRef.putFile(fileImage).addOnSuccessListener {
+//                storageRef.downloadUrl.addOnSuccessListener { imageUri ->
+//                    Log.e("TAG", "imageUrl:${imageUri}")
 
 
-        )
-            upLoadImage()
+                    viewModel.addNewProduct(
+                        binding?.editNameCompany?.text.toString(),
+                        binding?.editPhoneNumber1?.text.toString(),
+                        binding?.editNameProduct?.text.toString(),
+                        binding?.price?.text.toString(),
+                        fileImage.toString()
+                    )
+                }
+//            }
+//        }
+
+
+
+
+
             val action = AddFragmentDirections.actionAddFragmentToListFragment()
             findNavController().navigate(action)
         }
-    }
+
     private fun isEntryValid():Boolean{
         return viewModel.isEntryValid(
             binding?.editNameCompany?.text.toString(),
@@ -104,20 +124,23 @@ class AddFragment : Fragment() {
             binding?.imageCompany.toString()
         )
     }
-    fun upLoadImage() {
+    fun upLoadImage(): Uri {
 
+            val firestore = UUID.randomUUID().toString()
+            val storageRef = FirebaseStorage.getInstance().getReference("/images/$firestore")
+            storageRef.putFile(fileImage).addOnCompleteListener {task ->
+                Log.e("TAG","result:${task.result}")
+               storageRef.downloadUrl.addOnCompleteListener {task->
+                   if (task.isSuccessful){
+                       fileImage = task.result
+                   }
 
-        val firestore = UUID.randomUUID().toString()
-        val storageRef = FirebaseStorage.getInstance().getReference("/images/$firestore")
-                storageRef.putFile(fileImage).addOnSuccessListener {
-                    Log.e("TAG", "before:${it}")
-                    storageRef.downloadUrl.addOnSuccessListener {
-                        Log.e("TAG", "imageFile:${it}")
-                    }
 
                 }
+            }
 
 
+return fileImage
     }
 //    fun downLoadImage(){
 //        val firestore = UUID.randomUUID().toString()

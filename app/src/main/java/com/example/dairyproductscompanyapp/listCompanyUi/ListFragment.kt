@@ -2,6 +2,7 @@ package com.example.dairyproductscompanyapp.listCompanyUi
 
 import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -17,13 +18,15 @@ import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.flow.observeOn
+import javax.security.auth.Destroyable
 
 
 class ListFragment : Fragment() {
     private var _binding: FragmentListBinding? = null
     private val binding get() = _binding
 
-    private val viewModel:ListCompanyViewModel by activityViewModels {
+    private val viewModel: ListCompanyViewModel by activityViewModels {
         ViewModelFactory()
     }
 
@@ -68,6 +71,7 @@ class ListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+
     }
 
     override fun onCreateView(
@@ -81,15 +85,26 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        var adapter = binding?.recyclerView?.adapter
-//        adapter = CompanyListAdapter()
+        viewModel.retrieveCompany()
+        var adapter = CompanyListAdapter {
+            val action = ListFragmentDirections.actionListFragmentToAddFragment()
+            this.findNavController().navigate(action)
+        }
 
+        binding?.recyclerView?.adapter = adapter
+        viewModel.company.value.let {
+            adapter.submitList(it)
+
+        }
 
 
 
         val auth = Firebase.auth
         binding?.addButton?.setOnClickListener {
             checkUserSignIn()
+
+
+            Log.e("TAG", "www:${viewModel.company.value}")
         }
 
     }
@@ -137,6 +152,7 @@ class ListFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        view
         _binding = null
     }
 
