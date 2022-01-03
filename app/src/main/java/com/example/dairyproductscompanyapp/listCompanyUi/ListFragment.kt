@@ -91,7 +91,7 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var adapter = CompanyListAdapter {
-            val action = ListFragmentDirections.actionListFragmentToAddFragment()
+            val action = ListFragmentDirections.actionListFragmentToDetailCompanyFragment()
             this.findNavController().navigate(action)
         }
 //

@@ -76,8 +76,6 @@ class AddFragment : Fragment() {
     private fun addNewProduct() {
         if (isEntryValid()) {
 
-            Log.e("TAG", "fileimage::${fileImage}")
-            Log.e("TAG", "idk:${fileImage}")
 
 
             viewModel.addNewProduct(
@@ -102,31 +100,6 @@ class AddFragment : Fragment() {
             binding?.imageCompany.toString()
         )
     }
-
-//    fun upLoadImage(): Uri {
-//
-//        val firestore = UUID.randomUUID().toString()
-//        val storageRef = FirebaseStorage.getInstance().getReference("/images/$firestore")
-//        storageRef.putFile(fileImage).addOnCompleteListener { task ->
-//            Log.e("TAG", "result:${task.result}")
-//            storageRef.downloadUrl.addOnCompleteListener { task ->
-//                if (task.isSuccessful) {
-//                    fileImage = task.result
-//
-//                    return@addOnCompleteListener
-//                }
-//
-//                            return@addOnCompleteListener
-//            }
-//            return@addOnCompleteListener
-//        }
-//
-//
-//        return fileImage
-//        Log.e("TAG","fileimage::${fileImage}")
-//    }
-
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
