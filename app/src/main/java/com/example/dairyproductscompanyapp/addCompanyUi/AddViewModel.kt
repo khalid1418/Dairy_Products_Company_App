@@ -10,9 +10,9 @@ import kotlinx.coroutines.launch
 class AddViewModel(private val addUseCase: AddUseCase) : ViewModel() {
 
 
-    private fun insertProduct(product: CompanyDataModel) {
+    private fun insertProduct(product: CompanyDataModel, image: Uri) {
         viewModelScope.launch {
-            addUseCase.invoke(product)
+            addUseCase.invoke(product, image)
         }
 
     }
@@ -38,13 +38,19 @@ class AddViewModel(private val addUseCase: AddUseCase) : ViewModel() {
         phone: String,
         NameProduct: String,
         price: String,
-        imageView: String
+        imageView: String, imageUri: Uri
     ) {
         val newProduct = getNewProductEntry(Name, phone, NameProduct, price, imageView)
-        insertProduct(newProduct)
+        insertProduct(newProduct, imageUri)
     }
 
-    fun isEntryValid(name: String, phone: String, nameProduct: String, price: String , imageView: String): Boolean {
+    fun isEntryValid(
+        name: String,
+        phone: String,
+        nameProduct: String,
+        price: String,
+        imageView: String
+    ): Boolean {
         if (name.isBlank() || phone.isBlank() || nameProduct.isBlank() || price.isBlank() || imageView.isBlank()) {
             return false
         }

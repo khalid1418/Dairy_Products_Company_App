@@ -28,10 +28,12 @@
         android:layout_width="200dp"
         android:layout_height="58dp"
         android:layout_marginStart="5dp"
+        android:layout_marginTop="150dp"
         android:layout_marginBottom="300dp"
         android:hint="@string/nameproduct"
         app:layout_constraintBottom_toTopOf="@+id/Add_product"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_phone_number">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_name_product"
@@ -69,15 +71,18 @@
         android:scaleType="fitXY"
         tools:src="@tools:sample/avatars" />
 
+
     <EditText
         android:id="@+id/price"
-        android:layout_width="99dp"
+        android:layout_width="124dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginBottom="232dp"
         android:hint="Price"
         android:numeric="integer"
-        android:layout_height="60dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="300dp"
         app:layout_constraintBottom_toTopOf="@+id/Add_product"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toEndOf="@+id/name_product" />
 
     <Button

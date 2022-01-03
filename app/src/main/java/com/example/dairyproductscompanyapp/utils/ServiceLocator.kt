@@ -7,11 +7,14 @@ import com.example.dairyproductscompanyapp.domain.RetrieveUseCase
 import com.google.firebase.firestore.FirebaseFirestore
 
 
-fun providerCompanyFireStoreDataSource():CompanyFireStoreDataSource = CompanyFireStoreDataSource(
-    FirebaseFirestore.getInstance())
+fun providerCompanyFireStoreDataSource(): CompanyFireStoreDataSource = CompanyFireStoreDataSource(
+    FirebaseFirestore.getInstance()
+)
 
-fun providerCompanyRepository():CompanyRepository = CompanyRepository(
-    providerCompanyFireStoreDataSource())
-fun providerUseCaseAddProduct():AddUseCase = AddUseCase(providerCompanyRepository())
+fun providerCompanyRepository(): CompanyRepository = CompanyRepository(
+    providerCompanyFireStoreDataSource()
+)
 
-fun providerUseCaseRetrieveCompany():RetrieveUseCase = RetrieveUseCase(providerCompanyRepository())
+fun providerUseCaseAddProduct(): AddUseCase = AddUseCase(providerCompanyRepository())
+
+fun providerUseCaseRetrieveCompany(): RetrieveUseCase = RetrieveUseCase(providerCompanyRepository())

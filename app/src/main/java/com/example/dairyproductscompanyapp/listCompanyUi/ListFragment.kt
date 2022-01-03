@@ -7,6 +7,9 @@ import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.dairyproductscompanyapp.R
 import com.example.dairyproductscompanyapp.databinding.FragmentListBinding
@@ -18,7 +21,9 @@ import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.observeOn
+import kotlinx.coroutines.launch
 import javax.security.auth.Destroyable
 
 
@@ -85,18 +90,30 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.retrieveCompany()
         var adapter = CompanyListAdapter {
             val action = ListFragmentDirections.actionListFragmentToAddFragment()
             this.findNavController().navigate(action)
         }
-
+//
         binding?.recyclerView?.adapter = adapter
-        viewModel.company.value.let {
-            adapter.submitList(it)
-
-        }
-
+//        viewModel.company.value.let {
+//            adapter.submitList(it)
+//
+//        }
+//        binding?.recyclerView?.adapter = adapter
+//        lifecycleScope.launch {
+//            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+//
+//                viewModel.company.collect {
+//                    adapter.submitList(it)
+//                }
+//            }
+//        }
+        viewModel.companyLiveData.observe(viewLifecycleOwner, {
+            it.let {
+                adapter.submitList(it)
+            }
+        })
 
 
         val auth = Firebase.auth

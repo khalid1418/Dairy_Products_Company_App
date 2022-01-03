@@ -2,7 +2,6 @@ package com.example.dairyproductscompanyapp.addCompanyUi
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -10,36 +9,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.graphics.drawable.toIcon
+
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.dairyproductscompanyapp.databinding.FragmentAddBinding
 import com.example.dairyproductscompanyapp.utils.ViewModelFactory
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.ktx.storage
-import kotlinx.coroutines.async
-import kotlinx.coroutines.flow.emptyFlow
-import kotlinx.coroutines.tasks.await
-import java.io.File
-import java.net.URL
 import java.util.*
 
 
 class AddFragment : Fragment() {
-    private val viewModel:AddViewModel by  activityViewModels {
+    private val viewModel: AddViewModel by activityViewModels {
         ViewModelFactory()
     }
 
     private val REQUEST_CODE = 100
-   private var _binding : FragmentAddBinding? = null
-    private val binding get()=_binding
-  lateinit var  fileImage:Uri
-
+    private var _binding: FragmentAddBinding? = null
+    private val binding get() = _binding
+    lateinit var fileImage: Uri
 
 
     private fun openGalleryForImage() {
@@ -52,10 +39,10 @@ class AddFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE){
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE) {
             binding?.imageCompany?.setImageURI(data?.data) // handle chosen image
             fileImage = data?.data!!
-            Log.e("TAG","fileimag = ${fileImage}")
+            Log.e("TAG", "fileimag = ${fileImage}")
         }
     }
 
@@ -68,7 +55,7 @@ class AddFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding= FragmentAddBinding.inflate(inflater , container ,false)
+        _binding = FragmentAddBinding.inflate(inflater, container, false)
         return binding?.root
     }
 
@@ -85,37 +72,28 @@ class AddFragment : Fragment() {
 
 
     }
-    private fun addNewProduct(){
+
+    private fun addNewProduct() {
         if (isEntryValid()) {
-//            upLoadImage()
-//            Log.e("TAG","idk:${fileImage}")
-//            val firestore = UUID.randomUUID().toString()
-//            val storageRef = FirebaseStorage.getInstance().getReference("/images/$firestore")
-//            storageRef.putFile(fileImage).addOnSuccessListener {
-//                storageRef.downloadUrl.addOnSuccessListener { imageUri ->
-//                    Log.e("TAG", "imageUrl:${imageUri}")
+
+            Log.e("TAG", "fileimage::${fileImage}")
+            Log.e("TAG", "idk:${fileImage}")
 
 
-                    viewModel.addNewProduct(
-                        binding?.editNameCompany?.text.toString(),
-                        binding?.editPhoneNumber1?.text.toString(),
-                        binding?.editNameProduct?.text.toString(),
-                        binding?.price?.text.toString(),
-                        fileImage.toString()
-                    )
-                }
-//            }
-//        }
-
-
-
-
-
+            viewModel.addNewProduct(
+                binding?.editNameCompany?.text.toString(),
+                binding?.editPhoneNumber1?.text.toString(),
+                binding?.editNameProduct?.text.toString(),
+                binding?.price?.text.toString(),
+                "", fileImage
+            )
             val action = AddFragmentDirections.actionAddFragmentToListFragment()
             findNavController().navigate(action)
         }
+    }
 
-    private fun isEntryValid():Boolean{
+
+    private fun isEntryValid(): Boolean {
         return viewModel.isEntryValid(
             binding?.editNameCompany?.text.toString(),
             binding?.editPhoneNumber1?.text.toString(),
@@ -124,55 +102,35 @@ class AddFragment : Fragment() {
             binding?.imageCompany.toString()
         )
     }
-    fun upLoadImage(): Uri {
 
-            val firestore = UUID.randomUUID().toString()
-            val storageRef = FirebaseStorage.getInstance().getReference("/images/$firestore")
-            storageRef.putFile(fileImage).addOnCompleteListener {task ->
-                Log.e("TAG","result:${task.result}")
-               storageRef.downloadUrl.addOnCompleteListener {task->
-                   if (task.isSuccessful){
-                       fileImage = task.result
-                   }
-
-
-                }
-            }
-
-
-return fileImage
-    }
-//    fun downLoadImage(){
+//    fun upLoadImage(): Uri {
+//
 //        val firestore = UUID.randomUUID().toString()
-//
 //        val storageRef = FirebaseStorage.getInstance().getReference("/images/$firestore")
+//        storageRef.putFile(fileImage).addOnCompleteListener { task ->
+//            Log.e("TAG", "result:${task.result}")
+//            storageRef.downloadUrl.addOnCompleteListener { task ->
+//                if (task.isSuccessful) {
+//                    fileImage = task.result
 //
-//        storageRef.downloadUrl.addOnSuccessListener {
-//            Log.e("TAG","imageFile:${it}")
+//                    return@addOnCompleteListener
+//                }
+//
+//                            return@addOnCompleteListener
+//            }
+//            return@addOnCompleteListener
 //        }
+//
+//
+//        return fileImage
+//        Log.e("TAG","fileimage::${fileImage}")
 //    }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding=null
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
-
-
-
-
-
-
-//Glide.with.load(image_url.touri)
-//
-//        storageRef.downloadUrl.addOnSuccessListener {
-//            Log.e("TAG","uri:${it}")
-//        }
-
-
-
-
-
-
 
 
 }

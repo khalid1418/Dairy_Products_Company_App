@@ -11,30 +11,33 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class ListCompanyViewModel(private val retrieveUseCase: RetrieveUseCase) : ViewModel() {
+    //
+    private val _company = MutableStateFlow<List<CompanyDataModel>>(emptyList())
 
-    var _company = MutableStateFlow((MutableStateFlow<MutableList<CompanyDataModel>>(mutableListOf(
-        CompanyDataModel("khalid" , 2,"https://iconape.com/wp-content/files/uf/366551/png/366551.png")
-    ))))
-    val company: StateFlow<MutableList<CompanyDataModel>> = _company.value
+    //
+    var company: StateFlow<List<CompanyDataModel>> = _company.asStateFlow()
+
+//   private val _companyLiveData = MutableLiveData<List<CompanyDataModel>>()
+
+    val companyLiveData = company.asLiveData()
+
+    init {
+        retrieveCompany()
+    }
 
 
-
-    fun retrieveCompany() {
+    private fun retrieveCompany() {
         viewModelScope.launch {
             retrieveUseCase.invoke().collect { companyInfo ->
-                if (!_company.value.value.contains(companyInfo)) {
-                    _company.value.value.add(companyInfo)
-                }
 
-
-
-
-
-
-
+                _company.update { companyInfo }
+                Log.e("TAG", "before::${companyInfo}")
 
             }
-                Log.e("TAG", "LoopTime:${company.value}")
-            }
+
+
         }
+        Log.e("TAG", "LoopTime:${company.value}")
     }
+}
+

@@ -10,4 +10,6 @@
     <string name="add_product">Add Product</string>
     <string name="save">Save</string>
     <string name="nameproduct">NameProduct</string>
+    <string name="namecompany">NameCompany</string>
+    <string name="phonecompany">PhoneCompany</string>
 </resources>

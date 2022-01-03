@@ -1,5 +1,6 @@
 package com.example.dairyproductscompanyapp.listCompanyUi
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.net.toUri
@@ -13,17 +14,23 @@ import com.example.dairyproductscompanyapp.databinding.CompanyListBinding
 import com.example.dairyproductscompanyapp.databinding.FragmentAddBinding
 import kotlinx.coroutines.withContext
 
-class CompanyListAdapter(private val onItemClicked:(CompanyDataModel) -> Unit) :
+class CompanyListAdapter(private val onItemClicked: (CompanyDataModel) -> Unit) :
     ListAdapter<CompanyDataModel, CompanyListAdapter.CompanyViewHolder>(DiffCallback) {
 
 
     companion object {
         private val DiffCallback = object : DiffUtil.ItemCallback<CompanyDataModel>() {
-            override fun areItemsTheSame(oldItem: CompanyDataModel, newItem: CompanyDataModel): Boolean {
+            override fun areItemsTheSame(
+                oldItem: CompanyDataModel,
+                newItem: CompanyDataModel
+            ): Boolean {
                 return oldItem === newItem
             }
 
-            override fun areContentsTheSame(oldItem: CompanyDataModel, newItem: CompanyDataModel): Boolean {
+            override fun areContentsTheSame(
+                oldItem: CompanyDataModel,
+                newItem: CompanyDataModel
+            ): Boolean {
                 return oldItem.nameCompany == newItem.nameCompany
             }
 
