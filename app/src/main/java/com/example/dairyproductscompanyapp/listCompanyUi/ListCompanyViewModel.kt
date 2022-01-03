@@ -1,20 +1,43 @@
 package com.example.dairyproductscompanyapp.listCompanyUi
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.util.Log
+import androidx.lifecycle.*
+import androidx.loader.content.Loader
 import com.example.dairyproductscompanyapp.domain.RetrieveUseCase
 import com.example.dairyproductscompanyapp.model.CompanyDataModel
+import com.example.dairyproductscompanyapp.utils.providerUseCaseAddProduct
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-class ListCompanyViewModel(private val retrieveUseCase: RetrieveUseCase):ViewModel() {
+class ListCompanyViewModel(private val retrieveUseCase: RetrieveUseCase) : ViewModel() {
+    //
+    private val _company = MutableStateFlow<List<CompanyDataModel>>(emptyList())
 
-//     fun retrieveCompany(company:CompanyDataModel){
-//        viewModelScope.launch {
-//            retrieveUseCase.invoke(company)
-//        }
-//    }
+    //
+    var company: StateFlow<List<CompanyDataModel>> = _company.asStateFlow()
+
+//   private val _companyLiveData = MutableLiveData<List<CompanyDataModel>>()
+
+    val companyLiveData = company.asLiveData()
+
+    init {
+        retrieveCompany()
+    }
 
 
+    private fun retrieveCompany() {
+        viewModelScope.launch {
+            retrieveUseCase.invoke().collect { companyInfo ->
 
+                _company.update { companyInfo }
+                Log.e("TAG", "before::${companyInfo}")
+
+            }
+
+
+        }
+        Log.e("TAG", "LoopTime:${company.value}")
+    }
 }
+

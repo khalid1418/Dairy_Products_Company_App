@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_listFragment_to_addFragment"
             app:destination="@id/addFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_detailCompanyFragment"
+            app:destination="@id/detailCompanyFragment" />
     </fragment>
     <fragment
         android:id="@+id/addFragment"
@@ -23,4 +26,9 @@
             android:id="@+id/action_addFragment_to_listFragment"
             app:destination="@id/listFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/detailCompanyFragment"
+        android:name="com.example.dairyproductscompanyapp.detailCompanyUi.DetailCompanyFragment"
+        android:label="fragment_detail_company"
+        tools:layout="@layout/fragment_detail_company" />
 </navigation>

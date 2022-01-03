@@ -2,13 +2,18 @@ package com.example.dairyproductscompanyapp.listCompanyUi
 
 import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.dairyproductscompanyapp.R
 import com.example.dairyproductscompanyapp.databinding.FragmentListBinding
+import com.example.dairyproductscompanyapp.model.CompanyDataModel
 import com.example.dairyproductscompanyapp.utils.ViewModelFactory
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
@@ -16,13 +21,17 @@ import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.observeOn
+import kotlinx.coroutines.launch
+import javax.security.auth.Destroyable
 
 
 class ListFragment : Fragment() {
     private var _binding: FragmentListBinding? = null
     private val binding get() = _binding
 
-    private val viewModel:ListCompanyViewModel by activityViewModels {
+    private val viewModel: ListCompanyViewModel by activityViewModels {
         ViewModelFactory()
     }
 
@@ -67,6 +76,7 @@ class ListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+
     }
 
     override fun onCreateView(
@@ -80,10 +90,38 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.recyclerView?.adapter = CompanyListAdapter()
+        var adapter = CompanyListAdapter {
+            val action = ListFragmentDirections.actionListFragmentToDetailCompanyFragment()
+            this.findNavController().navigate(action)
+        }
+//
+        binding?.recyclerView?.adapter = adapter
+//        viewModel.company.value.let {
+//            adapter.submitList(it)
+//
+//        }
+//        binding?.recyclerView?.adapter = adapter
+//        lifecycleScope.launch {
+//            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+//
+//                viewModel.company.collect {
+//                    adapter.submitList(it)
+//                }
+//            }
+//        }
+        viewModel.companyLiveData.observe(viewLifecycleOwner, {
+            it.let {
+                adapter.submitList(it)
+            }
+        })
+
+
         val auth = Firebase.auth
         binding?.addButton?.setOnClickListener {
             checkUserSignIn()
+
+
+            Log.e("TAG", "www:${viewModel.company.value}")
         }
 
     }
@@ -131,6 +169,7 @@ class ListFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        view
         _binding = null
     }
 
