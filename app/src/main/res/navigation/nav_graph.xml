@@ -30,5 +30,21 @@
         android:id="@+id/detailCompanyFragment"
         android:name="com.example.dairyproductscompanyapp.detailCompanyUi.DetailCompanyFragment"
         android:label="fragment_detail_company"
-        tools:layout="@layout/fragment_detail_company" />
+        tools:layout="@layout/fragment_detail_company" >
+        <argument
+            android:name="namecompany"
+            app:argType="string" />
+        <argument
+            android:name="phonenumber"
+            app:argType="integer" />
+        <argument
+            android:name="nameproduct"
+            app:argType="string" />
+        <argument
+            android:name="price"
+            app:argType="integer" />
+        <argument
+            android:name="image"
+            app:argType="string" />
+    </fragment>
 </navigation>

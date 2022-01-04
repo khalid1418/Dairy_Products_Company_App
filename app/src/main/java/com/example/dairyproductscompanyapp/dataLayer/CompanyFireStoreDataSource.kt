@@ -1,5 +1,6 @@
 package com.example.dairyproductscompanyapp.dataLayer
 
+import android.app.ProgressDialog
 import android.net.Uri
 import android.util.Log
 import com.example.dairyproductscompanyapp.model.CompanyDataModel
@@ -27,6 +28,9 @@ class CompanyFireStoreDataSource(
 ) : CompanyDataSource {
     override suspend fun addProduct(product: CompanyDataModel, imge: Uri) {
         upload(imge).collect {
+
+
+            Log.e("TAG","uri :: $it")
             val db = firebaseFirestore
             product.image = it.toString()
             db.collection("product")
@@ -44,6 +48,7 @@ class CompanyFireStoreDataSource(
     }
 
     suspend fun upload(file: Uri): Flow<Uri> = callbackFlow {
+
 
         val firestore = UUID.randomUUID().toString()
         val storageRef = FirebaseStorage.getInstance().getReference("/images/$firestore")
@@ -84,6 +89,13 @@ class CompanyFireStoreDataSource(
             }
             awaitClose { }
         }
+
+//    override suspend fun getCompanyDetails(product: CompanyDataModel, id: String) {
+//
+//        val db = Firebase.firestore
+//        val docRef = db.collection("product").document()
+//        docRef.get()
+//    }
 
 
 }

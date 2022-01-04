@@ -6,7 +6,8 @@ data class CompanyDataModel(
     val phone:Int =0,
     var image: String = "",
     val nameProduct:String = "",
-    val price:Int = 0
+    val price:Int = 0,
+    val userid:String=""
 
 )
 

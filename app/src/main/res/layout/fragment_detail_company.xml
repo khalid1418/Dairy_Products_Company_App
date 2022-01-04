@@ -1,14 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".detailCompanyUi.DetailCompanyFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.dairyproductscompanyapp.detailCompanyUi.DetailViewModel" />
 
-</FrameLayout>
+
+    </data>
+
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/minus_one"
+            android:layout_width="40dp"
+            android:layout_height="46dp"
+            android:layout_marginEnd="24dp"
+            android:text="Button"
+            app:icon="@drawable/ic_baseline_remove_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/quantity_number" />
+
+        <TextView
+            android:id="@+id/name_company_detail"
+            android:layout_width="409dp"
+            android:layout_height="53dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="32dp"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_company_detail" />
+
+        <TextView
+            android:id="@+id/name_phone_detail"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_marginTop="32dp"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name_company_detail" />
+
+        <TextView
+            android:id="@+id/name_product_detail"
+            android:layout_width="219dp"
+            android:layout_height="63dp"
+            android:layout_marginBottom="250dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name_phone_detail"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/price_detail"
+            android:layout_width="97dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginBottom="250dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.047"
+            app:layout_constraintStart_toEndOf="@+id/name_product_detail"
+            app:layout_constraintTop_toBottomOf="@+id/name_phone_detail"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <ImageView
+            android:id="@+id/image_company_detail"
+            android:layout_width="413dp"
+            android:layout_height="121dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/quantity_number"
+            android:layout_width="63dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="16dp"
+            android:text="@{viewModel.quantity.toString()}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.36"
+            app:layout_constraintStart_toEndOf="@+id/price_detail"
+            app:layout_constraintTop_toTopOf="@+id/price_detail" />
+
+        <Button
+            android:id="@+id/plus_one"
+            android:layout_width="38dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="28dp"
+            android:drawableBottom="@drawable/ic_baseline_add_24"
+            app:layout_constraintBottom_toTopOf="@+id/quantity_number"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="195dp"
+            android:layout_height="59dp"
+            android:text="order"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

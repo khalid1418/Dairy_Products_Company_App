@@ -30,7 +30,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="150dp"
         android:layout_marginBottom="300dp"
-        android:hint="@string/nameproduct"
+        android:hint="@string/name_product"
         app:layout_constraintBottom_toTopOf="@+id/Add_product"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_phone_number">
@@ -78,7 +78,7 @@
         android:layout_height="48dp"
         android:layout_marginStart="2dp"
         android:layout_marginBottom="232dp"
-        android:hint="Price"
+        android:hint="@string/price"
         android:numeric="integer"
         app:layout_constraintBottom_toTopOf="@+id/Add_product"
         app:layout_constraintEnd_toEndOf="parent"
