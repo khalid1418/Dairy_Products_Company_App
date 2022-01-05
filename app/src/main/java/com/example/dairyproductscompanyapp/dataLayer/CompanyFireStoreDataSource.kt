@@ -4,6 +4,7 @@ import android.app.ProgressDialog
 import android.net.Uri
 import android.util.Log
 import com.example.dairyproductscompanyapp.model.CompanyDataModel
+import com.example.dairyproductscompanyapp.model.OrderDataModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -37,7 +38,9 @@ class CompanyFireStoreDataSource(
 
                 .add(product)
                 .addOnCompleteListener { documentReference ->
-                    Log.d("TAG", "DocumentSnapshot added with ID: $documentReference")
+                    Log.e("TAG", "DocumentSnapshot added with ID: ${documentReference.result.id}")
+
+
                 }
                 .addOnFailureListener { e ->
                     Log.w("TAG", "Error adding document", e)
@@ -90,6 +93,21 @@ class CompanyFireStoreDataSource(
             awaitClose { }
         }
 
+    override suspend fun sendOrderProduct(product: OrderDataModel) {
+        val db = firebaseFirestore
+        db.collection("order")
+            .add(product)
+            .addOnCompleteListener { documentReference ->
+                Log.d("TAG", "DocumentSnapshot added with ID: ${documentReference.result.id}")
+
+            }
+            .addOnFailureListener { e ->
+                Log.w("TAG", "Error adding document", e)
+            }
+    }
+    }
+
+
 //    override suspend fun getCompanyDetails(product: CompanyDataModel, id: String) {
 //
 //        val db = Firebase.firestore
@@ -98,7 +116,7 @@ class CompanyFireStoreDataSource(
 //    }
 
 
-}
+
 
 
 //        db.collection("product")

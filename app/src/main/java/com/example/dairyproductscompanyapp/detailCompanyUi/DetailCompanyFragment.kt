@@ -2,18 +2,24 @@ package com.example.dairyproductscompanyapp.detailCompanyUi
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.dairyproductscompanyapp.R
 import com.example.dairyproductscompanyapp.databinding.FragmentDetailCompanyBinding
 import com.example.dairyproductscompanyapp.model.CompanyDataModel
+import com.example.dairyproductscompanyapp.utils.ViewModelFactory
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 class DetailCompanyFragment : Fragment() {
@@ -32,6 +38,8 @@ class DetailCompanyFragment : Fragment() {
         _binding = FragmentDetailCompanyBinding.inflate(inflater , container , false)
         return binding?.root
     }
+
+
 
 
     @SuppressLint("CheckResult")
@@ -54,6 +62,11 @@ binding?.plusOne?.setOnClickListener {
 }
         binding?.minusOne?.setOnClickListener {
             viewModel.quantitydecrease()
+        }
+        binding?.orderButton?.setOnClickListener {
+            val action = DetailCompanyFragmentDirections.actionDetailCompanyFragmentToOrderProductCompanyFragment(viewModel.quantity.value!!.toInt(),navigationArgs.namecompany , navigationArgs.nameproduct , navigationArgs.price,navigationArgs.id)
+            findNavController().navigate(action)
+
         }
 
 

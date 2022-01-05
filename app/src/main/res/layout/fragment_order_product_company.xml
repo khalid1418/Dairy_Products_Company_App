@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".orderProduct.OrderProductCompanyFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/name_product"
+            android:layout_width="206dp"
+            android:layout_height="47dp"
+            android:layout_marginBottom="356dp"
+            android:text="NameProduct"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="103dp"
+            android:layout_height="47dp"
+            android:text="Price"
+            app:layout_constraintStart_toEndOf="@+id/name_product"
+            app:layout_constraintTop_toTopOf="@+id/name_product" />
+
+        <TextView
+            android:id="@+id/name_company"
+            android:layout_width="match_parent"
+            android:layout_height="77dp"
+            android:text="NameComapany"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/quantity"
+            android:layout_width="61dp"
+            android:layout_height="43dp"
+            android:text="Quantity"
+            app:layout_constraintStart_toEndOf="@+id/price"
+            app:layout_constraintTop_toTopOf="@+id/price" />
+
+        <Button
+            android:id="@+id/send"
+            android:layout_width="264dp"
+            android:layout_height="63dp"
+            android:text="@string/sendorder"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

@@ -22,7 +22,7 @@ class AddViewModel(private val addUseCase: AddUseCase) : ViewModel() {
         phone: String,
         NameProduct: String,
         price: String,
-        imageView: String,id:String
+        imageView: String, id: String
     ): CompanyDataModel {
         return CompanyDataModel(
             nameCompany = Name,
@@ -39,9 +39,10 @@ class AddViewModel(private val addUseCase: AddUseCase) : ViewModel() {
         phone: String,
         NameProduct: String,
         price: String,
-        imageView: String, imageUri: Uri,id: String
+        imageView: String,
+        imageUri: Uri, id: String
     ) {
-        val newProduct = getNewProductEntry(Name, phone, NameProduct, price, imageView , id)
+        val newProduct = getNewProductEntry(Name, phone, NameProduct, price, imageView, id)
         insertProduct(newProduct, imageUri)
     }
 
