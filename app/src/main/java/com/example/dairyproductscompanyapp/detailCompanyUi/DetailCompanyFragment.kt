@@ -2,7 +2,6 @@ package com.example.dairyproductscompanyapp.detailCompanyUi
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +26,7 @@ class DetailCompanyFragment : Fragment() {
     private val binding get() = _binding
     private val navigationArgs:DetailCompanyFragmentArgs by navArgs()
     private val viewModel:DetailViewModel by activityViewModels()
+    private val userid = Firebase.auth.currentUser?.uid
 
 
 
@@ -64,9 +64,34 @@ binding?.plusOne?.setOnClickListener {
             viewModel.quantitydecrease()
         }
         binding?.orderButton?.setOnClickListener {
-            val action = DetailCompanyFragmentDirections.actionDetailCompanyFragmentToOrderProductCompanyFragment(viewModel.quantity.value!!.toInt(),navigationArgs.namecompany , navigationArgs.nameproduct , navigationArgs.price,navigationArgs.id)
-            findNavController().navigate(action)
+            if (viewModel.quantity.value!! > 0) {
+                val action =
+                    DetailCompanyFragmentDirections.actionDetailCompanyFragmentToOrderProductCompanyFragment(
+                        viewModel.quantity.value!!.toInt(),
+                        navigationArgs.namecompany,
+                        navigationArgs.nameproduct,
+                        navigationArgs.price,
+                        navigationArgs.id,
+                        navigationArgs.refrance
+                    )
+                findNavController().navigate(action)
+            }
 
+        }
+        if (userid == navigationArgs.id) {
+            binding?.editButton?.setOnClickListener {
+                val action =
+                    DetailCompanyFragmentDirections.actionDetailCompanyFragmentToEditProductFragment(
+                        navigationArgs.namecompany,
+                        navigationArgs.phonenumber,
+                        navigationArgs.image,
+                        navigationArgs.nameproduct,
+                        navigationArgs.price,
+                        navigationArgs.id , navigationArgs.refrance)
+                findNavController().navigate(action)
+            }
+        } else{
+            binding?.editButton?.visibility=View.INVISIBLE
         }
 
 
