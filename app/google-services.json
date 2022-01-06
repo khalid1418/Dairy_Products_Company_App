@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "855990399826",
+    "project_id": "dairy-products-company",
+    "storage_bucket": "dairy-products-company.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:855990399826:android:82904e25d935b36fef808b",
+        "android_client_info": {
+          "package_name": "com.example.dairyproductscompanyapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "855990399826-t8d6vs59jera4miifopqjn44q43ntpd9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQBmSsuGv0whJaDEja_b1vdX9hDlKygac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "855990399826-t8d6vs59jera4miifopqjn44q43ntpd9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

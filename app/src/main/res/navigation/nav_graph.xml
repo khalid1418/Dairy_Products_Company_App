@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/listFragment">
+
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.example.dairyproductscompanyapp.listCompanyUi.ListFragment"
+        android:label="fragment_list"
+        tools:layout="@layout/fragment_list" >
+        <action
+            android:id="@+id/action_listFragment_to_addFragment"
+            app:destination="@id/addFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_detailCompanyFragment"
+            app:destination="@id/detailCompanyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addFragment"
+        android:name="com.example.dairyproductscompanyapp.addCompanyUi.AddFragment"
+        android:label="fragment_add"
+        tools:layout="@layout/fragment_add" >
+        <action
+            android:id="@+id/action_addFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailCompanyFragment"
+        android:name="com.example.dairyproductscompanyapp.detailCompanyUi.DetailCompanyFragment"
+        android:label="fragment_detail_company"
+        tools:layout="@layout/fragment_detail_company" >
+        <argument
+            android:name="namecompany"
+            app:argType="string" />
+        <argument
+            android:name="phonenumber"
+            app:argType="integer" />
+        <argument
+            android:name="nameproduct"
+            app:argType="string" />
+        <argument
+            android:name="price"
+            app:argType="integer" />
+        <argument
+            android:name="image"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_detailCompanyFragment_to_orderProductCompanyFragment"
+            app:destination="@id/orderProductCompanyFragment" />
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_detailCompanyFragment_to_editProductFragment"
+            app:destination="@id/editProductFragment" />
+        <argument
+            android:name="refrance"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderProductCompanyFragment"
+        android:name="com.example.dairyproductscompanyapp.orderProduct.OrderProductCompanyFragment"
+        android:label="fragment_order_product_company"
+        tools:layout="@layout/fragment_order_product_company" >
+        <argument
+            android:name="quantity"
+            app:argType="integer" />
+        <argument
+            android:name="namecompany"
+            app:argType="string" />
+        <argument android:name="nameproduct"
+            app:argType="string" />
+        <argument
+            android:name="price"
+            app:argType="integer" />
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_orderProductCompanyFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProductFragment"
+        android:name="com.example.dairyproductscompanyapp.editProductUi.EditProductFragment"
+        android:label="fragment_edit_product"
+        tools:layout="@layout/fragment_edit_product" >
+        <argument
+            android:name="namecompany"
+            app:argType="string" />
+        <argument
+            android:name="phone"
+            app:argType="integer" />
+        <argument
+            android:name="image"
+            app:argType="string" />
+        <argument
+            android:name="nameproduct"
+            app:argType="string" />
+        <argument
+            android:name="price"
+            app:argType="integer" />
+        <argument
+            android:name="userId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_editProductFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+        <argument
+            android:name="refrence"
+            app:argType="string" />
+    </fragment>
+</navigation>

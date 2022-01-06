@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">Dairy Products Company App</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sign_in">sign in</string>
+    <string name="login">login</string>
+    <string name="sign_out">Sign out</string>
+    <string name="name_company">Name Company:</string>
+    <string name="phone_number">phone Number:</string>
+    <string name="add_product">Add Product</string>
+    <string name="save">Save</string>
+    <string name="name_product">name Product</string>
+    <string name="price">Price</string>
+    <string name="nameproduct">NameProduct</string>
+    <string name="phonecompany">PhoneCompany</string>
+    <string name="sendorder">sendOrder</string>
+    <string name="titleDialog">SendOrder</string>
+    <string name="dialogMassage">are you sure</string>
+    <string name="canceldialog">cancel</string>
+    <string name="sendDialog">send</string>
+    <string name="button">Button</string>
+    <string name="order">order</string>
+    <string name="edit">edit</string>
+    <!--    <string name="quantity">quantity %s</string>-->
 </resources>
