@@ -81,6 +81,9 @@
         <action
             android:id="@+id/action_orderProductCompanyFragment_to_listFragment"
             app:destination="@id/listFragment" />
+        <argument
+            android:name="refrence"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/editProductFragment"

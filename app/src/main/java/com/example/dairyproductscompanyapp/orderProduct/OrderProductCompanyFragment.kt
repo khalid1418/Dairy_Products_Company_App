@@ -33,7 +33,8 @@ fun addOrder(){
     viewModel.addNewOrder(
         binding?.quantity?.text.toString(),
         userid.toString(),
-        navigationArgs2.id
+        navigationArgs2.id,
+        navigationArgs2.refrence
 
     )
     val action = OrderProductCompanyFragmentDirections.actionOrderProductCompanyFragmentToListFragment()

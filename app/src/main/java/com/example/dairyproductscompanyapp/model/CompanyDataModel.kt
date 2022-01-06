@@ -18,6 +18,7 @@ data class CompanyDataModel(
 data class OrderDataModel(
     val quantity:Int ,
     val buyerId:String,
-    val sellerId:String
+    val sellerId:String,
+    val reference:String
 )
 

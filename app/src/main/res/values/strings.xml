@@ -9,7 +9,7 @@
     <string name="phone_number">phone Number:</string>
     <string name="add_product">Add Product</string>
     <string name="save">Save</string>
-    <string name="name_product">name Product</string>
+    <string name="name_product">Name Product</string>
     <string name="price">Price</string>
     <string name="nameproduct">NameProduct</string>
     <string name="phonecompany">PhoneCompany</string>
@@ -21,5 +21,6 @@
     <string name="button">Button</string>
     <string name="order">order</string>
     <string name="edit">edit</string>
+    <string name="quantity">Quantity</string>
     <!--    <string name="quantity">quantity %s</string>-->
 </resources>

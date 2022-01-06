@@ -71,7 +71,8 @@ binding?.plusOne?.setOnClickListener {
                         navigationArgs.namecompany,
                         navigationArgs.nameproduct,
                         navigationArgs.price,
-                        navigationArgs.id
+                        navigationArgs.id,
+                        navigationArgs.refrance
                     )
                 findNavController().navigate(action)
             }
