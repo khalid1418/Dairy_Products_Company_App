@@ -15,4 +15,6 @@ class CompanyRepository(
 
     suspend fun addOrder(product: OrderDataModel) = companyFireStoreDataSource.sendOrderProduct(product)
 
+    suspend fun editProduct(product: CompanyDataModel , id:String) = companyFireStoreDataSource.editProduct(product , id)
+
 }

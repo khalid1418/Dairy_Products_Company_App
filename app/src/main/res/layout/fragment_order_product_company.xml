@@ -15,6 +15,9 @@
             android:layout_width="206dp"
             android:layout_height="47dp"
             android:layout_marginBottom="356dp"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textAlignment="center"
             android:text="NameProduct"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -26,6 +29,8 @@
             android:layout_width="103dp"
             android:layout_height="47dp"
             android:text="Price"
+            android:textColor="@color/black"
+            android:textSize="20dp"
             app:layout_constraintStart_toEndOf="@+id/name_product"
             app:layout_constraintTop_toTopOf="@+id/name_product" />
 
@@ -47,6 +52,8 @@
             android:layout_width="61dp"
             android:layout_height="43dp"
             android:text="Quantity"
+            android:textSize="15dp"
+            android:textColor="@color/black"
             app:layout_constraintStart_toEndOf="@+id/price"
             app:layout_constraintTop_toTopOf="@+id/price" />
 

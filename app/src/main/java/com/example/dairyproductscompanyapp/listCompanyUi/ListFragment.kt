@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.core.graphics.green
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -92,7 +93,7 @@ class ListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         var adapter = CompanyListAdapter {
             Log.e("TAG","id:${it.userid}")
-            val action = ListFragmentDirections.actionListFragmentToDetailCompanyFragment(it.nameCompany , it.phone , it.nameProduct , it.price , it.image , it.userid)
+            val action = ListFragmentDirections.actionListFragmentToDetailCompanyFragment(it.nameCompany , it.phone , it.nameProduct , it.price , it.image , it.userid , it.reference)
             this.findNavController().navigate(action)
         }
 
@@ -143,6 +144,7 @@ class ListFragment : Fragment() {
                     .signOut(requireContext())
                     .addOnCompleteListener {
                         Toast.makeText(context, "LogOut", Toast.LENGTH_SHORT).show()
+
                     }
                 isSignIn = true
             }
@@ -170,7 +172,6 @@ class ListFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        view
         _binding = null
     }
 

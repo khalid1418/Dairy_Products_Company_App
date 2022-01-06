@@ -34,21 +34,28 @@ class CompanyFireStoreDataSource(
             Log.e("TAG","uri :: $it")
             val db = firebaseFirestore
             product.image = it.toString()
-            db.collection("product")
+        var s = db.collection("product").document()
+            var ss = s.id
+            product.reference=ss
 
-                .add(product)
-                .addOnCompleteListener { documentReference ->
-                    Log.e("TAG", "DocumentSnapshot added with ID: ${documentReference.result.id}")
+            Log.e("TAG", "addProduct:${product.reference} " )
+                s.set(product)
+
+              .addOnSuccessListener { documentReference ->
+                    Log.e("TAG", "DocumentSnapshot added with ID: ${documentReference}")
 
 
+                    return@addOnSuccessListener
                 }
                 .addOnFailureListener { e ->
                     Log.w("TAG", "Error adding document", e)
                 }
+
         }
 
-
     }
+
+
 
     suspend fun upload(file: Uri): Flow<Uri> = callbackFlow {
 
@@ -60,8 +67,12 @@ class CompanyFireStoreDataSource(
                 Log.e("TAG", "imageUrl:${imageUri}")
                 trySend(imageUri)
             }
+                .addOnFailureListener {
+                    Log.e("TAG","error:$it")
+                }
 
         }
+
         awaitClose { }
 
     }
@@ -99,13 +110,30 @@ class CompanyFireStoreDataSource(
             .add(product)
             .addOnCompleteListener { documentReference ->
                 Log.d("TAG", "DocumentSnapshot added with ID: ${documentReference.result.id}")
-
             }
             .addOnFailureListener { e ->
                 Log.w("TAG", "Error adding document", e)
             }
+
     }
+
+    override suspend fun editProduct(product: CompanyDataModel , id:String) {
+//        upload(imge).collect {
+            val db = firebaseFirestore
+//            product.image = it.toString()
+        product.reference = id
+        Log.e("TAG", "editProduct: hi:$id", )
+            db.collection("product").document("${product.reference}")
+                .set(product)
+                .addOnCompleteListener { documentReference ->
+                    Log.e("TAG", "editProduct:${documentReference.result}")
+                }
+                .addOnFailureListener {
+
+                }
+        }
     }
+
 
 
 //    override suspend fun getCompanyDetails(product: CompanyDataModel, id: String) {

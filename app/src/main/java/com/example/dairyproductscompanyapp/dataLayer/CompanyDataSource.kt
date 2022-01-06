@@ -11,5 +11,6 @@ interface CompanyDataSource {
     suspend fun addProduct(product: CompanyDataModel, imageURI: Uri)
     suspend fun retrieveCompanyData(): Flow<List<CompanyDataModel>>
 suspend fun sendOrderProduct(product: OrderDataModel)
+suspend fun editProduct(product: CompanyDataModel , id:String)
 
 }

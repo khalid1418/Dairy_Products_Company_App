@@ -21,7 +21,7 @@
                 android:id="@+id/name"
                 android:layout_width="250dp"
                 android:layout_height="74dp"
-                android:text="@string/namecompany"
+                android:text="@string/name_company"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"

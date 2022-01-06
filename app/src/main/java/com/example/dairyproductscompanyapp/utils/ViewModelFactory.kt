@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.dairyproductscompanyapp.addCompanyUi.AddViewModel
 import com.example.dairyproductscompanyapp.detailCompanyUi.DetailViewModel
+import com.example.dairyproductscompanyapp.editProductUi.EditProductViewModel
 import com.example.dairyproductscompanyapp.listCompanyUi.ListCompanyViewModel
 import com.example.dairyproductscompanyapp.orderProduct.OrderProductCompanyViewModel
 import java.lang.IllegalArgumentException
@@ -19,6 +20,9 @@ class ViewModelFactory() : ViewModelProvider.Factory {
         } else if (modelClass.isAssignableFrom(OrderProductCompanyViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return OrderProductCompanyViewModel(providerUseCaseAddOrder()) as T
+        } else if (modelClass.isAssignableFrom(EditProductViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return EditProductViewModel(providerUseCaseEditProduct()) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

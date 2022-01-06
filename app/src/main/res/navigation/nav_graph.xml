@@ -52,6 +52,12 @@
         <argument
             android:name="id"
             app:argType="string" />
+        <action
+            android:id="@+id/action_detailCompanyFragment_to_editProductFragment"
+            app:destination="@id/editProductFragment" />
+        <argument
+            android:name="refrance"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/orderProductCompanyFragment"
@@ -75,5 +81,35 @@
         <action
             android:id="@+id/action_orderProductCompanyFragment_to_listFragment"
             app:destination="@id/listFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProductFragment"
+        android:name="com.example.dairyproductscompanyapp.editProductUi.EditProductFragment"
+        android:label="fragment_edit_product"
+        tools:layout="@layout/fragment_edit_product" >
+        <argument
+            android:name="namecompany"
+            app:argType="string" />
+        <argument
+            android:name="phone"
+            app:argType="integer" />
+        <argument
+            android:name="image"
+            app:argType="string" />
+        <argument
+            android:name="nameproduct"
+            app:argType="string" />
+        <argument
+            android:name="price"
+            app:argType="integer" />
+        <argument
+            android:name="userId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_editProductFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+        <argument
+            android:name="refrence"
+            app:argType="string" />
     </fragment>
 </navigation>
