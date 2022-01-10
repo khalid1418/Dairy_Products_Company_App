@@ -29,8 +29,9 @@ class ViewModelFactory() : ViewModelProvider.Factory {
                 @Suppress("UNCHECKED_CAST")
                 return EditProductViewModel(providerUseCaseEditProduct()) as T
             }
-            modelClass.isAssignableFrom(OrderListViewModel::class.java) -> @Suppress("UNCHECKED_CAST")
-            return OrderListViewModel(providerUseCaseRetrieveOrderBuyer()) as T
+            modelClass.isAssignableFrom(OrderListViewModel::class.java) -> @Suppress("UNCHECKED_CAST"){
+            return OrderListViewModel(providerUseCaseRetrieveOrderBuyer() , providerUseCaseDeleteOrder()) as T
+                }
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

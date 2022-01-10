@@ -23,3 +23,5 @@ fun providerUseCaseAddOrder():OrderAddProductUseCase = OrderAddProductUseCase(
 fun providerUseCaseEditProduct():EditProductUseCase = EditProductUseCase(providerCompanyRepository())
 fun providerUseCaseRetrieveOrderBuyer():RetrieveOrderBuyerUseCase = RetrieveOrderBuyerUseCase(
     providerCompanyRepository())
+fun providerUseCaseDeleteOrder():DeleteOrderDoneUseCase = DeleteOrderDoneUseCase(
+    providerCompanyRepository())

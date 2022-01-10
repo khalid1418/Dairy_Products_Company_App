@@ -22,7 +22,7 @@
                 android:layout_height="44dp"
                 android:text="@string/name_product"
                 android:textColor="@color/black"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -53,11 +53,21 @@
 
             <CheckBox
                 android:id="@+id/checkBox4"
-                android:layout_width="108dp"
-                android:layout_height="48dp"
-                android:text="CheckBox"
+                android:layout_width="143dp"
+                android:layout_height="40dp"
+                android:text="@string/check_if_you_done"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/name_product" />
+
+            <Button
+                android:id="@+id/delete_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/done"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/quantity" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

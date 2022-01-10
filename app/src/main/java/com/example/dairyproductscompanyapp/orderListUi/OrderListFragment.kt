@@ -30,7 +30,7 @@ private var _binding:FragmentOrderListBinding?=null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val adapter = OrderAdapter()
+        val adapter = OrderAdapter(viewModel)
         binding?.recyclerView?.adapter=adapter
 
 
@@ -40,9 +40,13 @@ private var _binding:FragmentOrderListBinding?=null
                 adapter.submitList(it)
             }
         })
+
     }
 
-
+    override fun onResume() {
+        super.onResume()
+        viewModel.retrieveOrderCompany()
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

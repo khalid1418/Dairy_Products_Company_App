@@ -24,5 +24,7 @@
     <string name="quantity">Quantity</string>
     <string name="add_fragment">AddProfileCompany</string>
     <string name="my_customer_order">My customer order</string>
+    <string name="check_if_you_done">check if you done</string>
+    <string name="done">Done</string>
     <!--    <string name="quantity">quantity %s</string>-->
 </resources>
