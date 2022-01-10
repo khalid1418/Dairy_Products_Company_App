@@ -8,19 +8,22 @@
     <fragment
         android:id="@+id/listFragment"
         android:name="com.example.dairyproductscompanyapp.listCompanyUi.ListFragment"
-        android:label="fragment_list"
-        tools:layout="@layout/fragment_list" >
+        android:label="Dairy"
+        tools:layout="@layout/fragment_list">
         <action
             android:id="@+id/action_listFragment_to_addFragment"
             app:destination="@id/addFragment" />
         <action
             android:id="@+id/action_listFragment_to_detailCompanyFragment"
             app:destination="@id/detailCompanyFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_orderListFragment"
+            app:destination="@id/orderListFragment" />
     </fragment>
     <fragment
         android:id="@+id/addFragment"
         android:name="com.example.dairyproductscompanyapp.addCompanyUi.AddFragment"
-        android:label="fragment_add"
+        android:label="@string/add_fragment"
         tools:layout="@layout/fragment_add" >
         <action
             android:id="@+id/action_addFragment_to_listFragment"
@@ -115,4 +118,9 @@
             android:name="refrence"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/orderListFragment"
+        android:name="com.example.dairyproductscompanyapp.orderListUi.OrderListFragment"
+        android:label="fragment_order_list"
+        tools:layout="@layout/fragment_order_list" />
 </navigation>

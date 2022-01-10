@@ -34,7 +34,7 @@ class EditProductFragment() : Fragment() {
     val userId = Firebase.auth.currentUser?.uid
     private val navigationArgs3: EditProductFragmentArgs by navArgs()
     private val REQUEST_CODE = 100
-     var fileImage: Uri ="".toUri()
+     private var fileImage: Uri? =null
 
 
 
@@ -69,7 +69,7 @@ class EditProductFragment() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         bind()
         binding?.imageCompany?.setOnClickListener {
-//            openGalleryForImage()
+            openGalleryForImage()
 
         }
         binding?.SaveProduct?.setOnClickListener {
@@ -100,7 +100,7 @@ class EditProductFragment() : Fragment() {
                 binding?.editPhoneNumber1?.text.toString(),
                 binding?.editNameProduct?.text.toString(),
                 binding?.priceEdit?.text.toString(),
-                navigationArgs3.image , userId!! , navigationArgs3.refrence
+                navigationArgs3.image , userId!! , navigationArgs3.refrence ,fileImage
 
 
             )

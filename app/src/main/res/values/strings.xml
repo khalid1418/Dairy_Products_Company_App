@@ -22,5 +22,7 @@
     <string name="order">order</string>
     <string name="edit">edit</string>
     <string name="quantity">Quantity</string>
+    <string name="add_fragment">AddProfileCompany</string>
+    <string name="my_customer_order">My customer order</string>
     <!--    <string name="quantity">quantity %s</string>-->
 </resources>

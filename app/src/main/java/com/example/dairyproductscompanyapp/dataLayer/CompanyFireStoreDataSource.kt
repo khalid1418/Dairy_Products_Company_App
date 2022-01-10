@@ -1,47 +1,40 @@
 package com.example.dairyproductscompanyapp.dataLayer
 
-import android.app.ProgressDialog
 import android.net.Uri
 import android.util.Log
 import com.example.dairyproductscompanyapp.model.CompanyDataModel
 import com.example.dairyproductscompanyapp.model.OrderDataModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.flow.collect
-import java.net.URI
 import java.util.*
 
 class CompanyFireStoreDataSource(
     private val firebaseFirestore: FirebaseFirestore,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : CompanyDataSource {
-    override suspend fun addProduct(product: CompanyDataModel, imge: Uri) {
-        upload(imge).collect {
+    override suspend fun addProduct(product: CompanyDataModel, imageURI: Uri) {
+        upload(imageURI).collect {
 
 
-            Log.e("TAG","uri :: $it")
+            Log.e("TAG", "uri :: $it")
             val db = firebaseFirestore
             product.image = it.toString()
-        var s = db.collection("product").document()
-            var ss = s.id
-            product.reference=ss
+            var path = db.collection("product").document()
+            var id = path.id
+            product.reference = id
 
-            Log.e("TAG", "addProduct:${product.reference} " )
-                s.set(product)
+            Log.e("TAG", "addProduct:${product.reference} ")
+            path.set(product)
 
-              .addOnSuccessListener { documentReference ->
+                .addOnSuccessListener { documentReference ->
                     Log.e("TAG", "DocumentSnapshot added with ID: ${documentReference}")
 
 
@@ -56,7 +49,6 @@ class CompanyFireStoreDataSource(
     }
 
 
-
     suspend fun upload(file: Uri): Flow<Uri> = callbackFlow {
 
 
@@ -68,7 +60,7 @@ class CompanyFireStoreDataSource(
                 trySend(imageUri)
             }
                 .addOnFailureListener {
-                    Log.e("TAG","error:$it")
+                    Log.e("TAG", "error:$it")
                 }
 
         }
@@ -106,10 +98,13 @@ class CompanyFireStoreDataSource(
 
     override suspend fun sendOrderProduct(product: OrderDataModel) {
         val db = firebaseFirestore
-        db.collection("order")
-            .add(product)
+       val path =  db.collection("order").document()
+               var id = path.id
+        product.document=id
+
+            path.set(product)
             .addOnCompleteListener { documentReference ->
-                Log.d("TAG", "DocumentSnapshot added with ID: ${documentReference.result.id}")
+                Log.d("TAG", "DocumentSnapshot added with ID: ${documentReference.result}")
             }
             .addOnFailureListener { e ->
                 Log.w("TAG", "Error adding document", e)
@@ -117,49 +112,72 @@ class CompanyFireStoreDataSource(
 
     }
 
-    override suspend fun editProduct(product: CompanyDataModel , id:String) {
-//        upload(imge).collect {
+    override suspend fun editProduct(product: CompanyDataModel, id: String, image: Uri?) {
+//        if (image.toString().contains("https:")) {
+//            val db = firebaseFirestore
+//            product.reference = id
+//            db.collection("product").document(product.reference)
+//                .set(product)
+//                .addOnCompleteListener { documentReference ->
+//                    Log.e("TAG", "editProduct:${documentReference.result}")
+//                }
+        if (image != null) {
+            upload(image).collect {
+                val db = firebaseFirestore
+                product.image = it.toString()
+                product.reference = id
+                Log.e("TAG", "editProduct: hi:$id")
+                db.collection("product").document(product.reference)
+                    .set(product)
+                    .addOnCompleteListener { documentReference ->
+                        Log.e("TAG", "editProduct:${documentReference.result}")
+                    }
+                    .addOnFailureListener {
+
+                    }
+            }
+        } else {
             val db = firebaseFirestore
-//            product.image = it.toString()
-        product.reference = id
-        Log.e("TAG", "editProduct: hi:$id", )
-            db.collection("product").document("${product.reference}")
+            product.reference = id
+            db.collection("product").document(product.reference)
                 .set(product)
                 .addOnCompleteListener { documentReference ->
                     Log.e("TAG", "editProduct:${documentReference.result}")
                 }
-                .addOnFailureListener {
-
-                }
         }
     }
 
+    override suspend fun retrieveOrderBuyer(): Flow<List<OrderDataModel>> =
+        callbackFlow {
+            val db = firebaseFirestore
+            val docRef =
+                db.collection("order").whereEqualTo("sellerId", "${Firebase.auth.currentUser?.uid}")
+            Log.e("TAG","userId:${Firebase.auth.currentUser?.uid}")
+            docRef.addSnapshotListener { snap, e ->
+                if (e != null) {
+                    Log.w("TAG", "Listen failed.", e)
+                }
+                val list = mutableListOf<OrderDataModel>()
+
+                for (document in snap!!.documents)
+                    if (!snap.isEmpty) {
+                        val productInfo = document.toObject(OrderDataModel::class.java)
+                        list.add(productInfo!!)
 
 
-//    override suspend fun getCompanyDetails(product: CompanyDataModel, id: String) {
-//
-//        val db = Firebase.firestore
-//        val docRef = db.collection("product").document()
-//        docRef.get()
-//    }
+                    } else {
+                        Log.d("TAG", "Current data: null")
 
+                    }
+                    trySend(list)
+            }
+            awaitClose{ }
+        }
 
+    override suspend fun deleteOrderDone(product: OrderDataModel) {
+        val db = firebaseFirestore
+        val docRef = db.collection("order").document(product.document)
+        docRef.delete()
+    }
 
-
-
-//        db.collection("product")
-//            .get()
-//            .addOnSuccessListener {result ->
-//                val retrieveAllInfo = result.toObjects(CompanyDataModel::class.java)
-//                Log.e("TAG","massage:${this}")
-//                trySend(retrieveAllInfo)
-//                for (document in result){
-//
-//
-//                    Log.d("TAG","${document.id} => ${document.data}")
-//                }
-//            }
-//            .addOnFailureListener { exception ->
-//                Log.w("TAG","Error getting documents.",exception)
-//
-//            }
+}

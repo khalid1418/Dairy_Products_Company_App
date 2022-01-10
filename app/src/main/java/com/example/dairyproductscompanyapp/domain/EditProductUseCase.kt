@@ -5,5 +5,5 @@ import com.example.dairyproductscompanyapp.dataLayer.CompanyRepository
 import com.example.dairyproductscompanyapp.model.CompanyDataModel
 
 class EditProductUseCase(private val editProductRepository: CompanyRepository) {
-    suspend operator fun invoke(product:CompanyDataModel , id:String) = editProductRepository.editProduct(product , id)
+    suspend operator fun invoke(product:CompanyDataModel , id:String , image:Uri?) = editProductRepository.editProduct(product , id , image)
 }

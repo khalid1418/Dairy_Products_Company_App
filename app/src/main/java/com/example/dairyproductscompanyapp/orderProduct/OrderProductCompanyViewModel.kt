@@ -21,23 +21,25 @@ class OrderProductCompanyViewModel(private val orderAddProductUseCase: OrderAddP
 
     private fun getNewProductEntry(
         quantity: String,
-        buyerid: String,userId:String , refrence:String
+        buyerid: String,userId:String , refrence:String,nameProduct:String , price:String
 
     ): OrderDataModel {
         return OrderDataModel(
             quantity = quantity.toInt(),
             buyerId = buyerid,
-            userId,refrence
+            userId,refrence,
+            nameProduct = nameProduct,
+            price = price.toInt()
 
         )
     }
 
     fun addNewOrder(
         quantity: String,
-        buyerid: String,userId: String , refrence: String
+        buyerid: String,userId: String , refrence: String , nameProduct: String , price: String
 
     ) {
-        val newOrder = getNewProductEntry(quantity, buyerid ,userId  , refrence)
+        val newOrder = getNewProductEntry(quantity, buyerid ,userId  , refrence , nameProduct , price)
         insertOrderProduct(newOrder)
     }
 }

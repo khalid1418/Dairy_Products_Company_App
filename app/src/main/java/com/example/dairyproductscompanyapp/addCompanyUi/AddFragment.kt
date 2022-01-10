@@ -31,10 +31,9 @@ class AddFragment : Fragment() {
 
     private var _binding: FragmentAddBinding? = null
     private val binding get() = _binding
-    private val REQUEST_CODE = 100
     lateinit var fileImage: Uri
     val userId = Firebase.auth.currentUser?.uid
-
+    private val REQUEST_CODE = 100
 
 
     private fun openGalleryForImage() {

@@ -16,9 +16,11 @@ data class CompanyDataModel(
 )
 
 data class OrderDataModel(
-    val quantity:Int ,
-    val buyerId:String,
-    val sellerId:String,
-    val reference:String
+    val quantity:Int =0 ,
+    val buyerId:String ="",
+    val sellerId:String="",
+    val reference:String="",
+    val nameProduct: String="",
+    val price: Int=0,
+    var document:String=""
 )
-

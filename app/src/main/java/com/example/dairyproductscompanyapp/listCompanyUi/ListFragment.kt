@@ -98,19 +98,7 @@ class ListFragment : Fragment() {
         }
 
         binding?.recyclerView?.adapter = adapter
-//        viewModel.company.value.let {
-//            adapter.submitList(it)
-//
-//        }
-//        binding?.recyclerView?.adapter = adapter
-//        lifecycleScope.launch {
-//            repeatOnLifecycle(Lifecycle.State.RESUMED) {
-//
-//                viewModel.company.collect {
-//                    adapter.submitList(it)
-//                }
-//            }
-//        }
+
         viewModel.companyLiveData.observe(viewLifecycleOwner, {
             it.let {
                 adapter.submitList(it)
@@ -118,12 +106,13 @@ class ListFragment : Fragment() {
         })
 
 
+
         val auth = Firebase.auth
         binding?.addButton?.setOnClickListener {
             checkUserSignIn()
 
 
-            Log.e("TAG", "www:${viewModel.company.value}")
+//            Log.e("TAG", "www:${viewModel.company.value}")
         }
 
     }
@@ -147,6 +136,9 @@ class ListFragment : Fragment() {
 
                     }
                 isSignIn = true
+            }
+            R.id.order_buyer -> {
+                findNavController().navigate(R.id.action_listFragment_to_orderListFragment)
             }
         }
         return true

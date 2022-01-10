@@ -9,9 +9,9 @@ import kotlinx.coroutines.launch
 
 class EditProductViewModel(private val editProductUseCase:EditProductUseCase):ViewModel() {
 
-     fun editProduct(product: CompanyDataModel , id:String) {
+     fun editProduct(product: CompanyDataModel , id:String , image:Uri?) {
         viewModelScope.launch {
-            editProductUseCase.invoke(product , id)
+            editProductUseCase.invoke(product , id , image)
         }
 
     }
@@ -39,10 +39,10 @@ class EditProductViewModel(private val editProductUseCase:EditProductUseCase):Vi
         NameProduct: String,
         price: String,
         imageView: String,
-         id: String ,refrance:String
+         id: String ,refrance:String ,image: Uri?
     ) {
         val newProduct = getOldProductEntry(Name, phone, NameProduct, price, imageView, id)
-        editProduct(newProduct , refrance)
+        editProduct(newProduct , refrance , image)
     }
 
     fun isEntryValid(
