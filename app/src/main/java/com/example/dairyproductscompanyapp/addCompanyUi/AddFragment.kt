@@ -76,6 +76,7 @@ class AddFragment : Fragment() {
         }
 
 
+
     }
 
     private fun addNewProduct() {
@@ -86,7 +87,7 @@ class AddFragment : Fragment() {
                 binding?.editNameCompany?.text.toString(),
                 binding?.editPhoneNumber1?.text.toString(),
                 binding?.editNameProduct?.text.toString(),
-                binding?.price?.text.toString(),
+                binding?.priceAdd?.text.toString(),
                  "",fileImage ,
                 userId!!
 
@@ -102,7 +103,7 @@ class AddFragment : Fragment() {
             binding?.editNameCompany?.text.toString(),
             binding?.editPhoneNumber1?.text.toString(),
             binding?.editNameProduct?.text.toString(),
-            binding?.price?.text.toString(),
+            binding?.priceAdd?.text.toString(),
             binding?.imageCompany.toString()
         )
     }

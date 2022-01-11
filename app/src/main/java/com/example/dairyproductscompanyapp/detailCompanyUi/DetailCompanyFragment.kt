@@ -65,16 +65,20 @@ binding?.plusOne?.setOnClickListener {
         }
         binding?.orderButton?.setOnClickListener {
             if (viewModel.quantity.value!! > 0) {
-                val action =
-                    DetailCompanyFragmentDirections.actionDetailCompanyFragmentToOrderProductCompanyFragment(
-                        viewModel.quantity.value!!.toInt(),
-                        navigationArgs.namecompany,
-                        navigationArgs.nameproduct,
-                        navigationArgs.price,
-                        navigationArgs.id,
-                        navigationArgs.refrance
-                    )
-                findNavController().navigate(action)
+                if (userid != null) {
+                    val action =
+                        DetailCompanyFragmentDirections.actionDetailCompanyFragmentToOrderProductCompanyFragment(
+                            viewModel.quantity.value!!.toInt(),
+                            navigationArgs.namecompany,
+                            navigationArgs.nameproduct,
+                            navigationArgs.price,
+                            navigationArgs.id,
+                            navigationArgs.refrance
+                        )
+                    findNavController().navigate(action)
+                }else{
+                    Toast.makeText(context, "YOU NOT SIGNIN", Toast.LENGTH_SHORT).show()
+                }
             }
 
         }
@@ -87,7 +91,8 @@ binding?.plusOne?.setOnClickListener {
                         navigationArgs.image,
                         navigationArgs.nameproduct,
                         navigationArgs.price,
-                        navigationArgs.id , navigationArgs.refrance)
+                        navigationArgs.id , navigationArgs.refrance
+                    )
                 findNavController().navigate(action)
             }
         } else{

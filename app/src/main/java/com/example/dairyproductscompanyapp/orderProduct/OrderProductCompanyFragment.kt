@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -21,7 +22,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-//const val GOOGLE_MAPS_APP = "com.google.android.apps.maps"
 
 class OrderProductCompanyFragment : Fragment() {
     private var _binding:FragmentOrderProductCompanyBinding? =null
@@ -33,17 +33,23 @@ class OrderProductCompanyFragment : Fragment() {
     private val userid = Firebase.auth.currentUser?.uid
 
 fun addOrder(){
-    viewModel.addNewOrder(
-        binding?.quantity?.text.toString(),
-        userid.toString(),
-        navigationArgs2.id,
-        navigationArgs2.refrence,
-        navigationArgs2.nameproduct,
-        navigationArgs2.price.toString()
+    if (viewModel.longtitude.value?.toDouble() == null){
+        Toast.makeText(context, "pleases pick location", Toast.LENGTH_SHORT).show()
+    }else {
+        viewModel.addNewOrder(
+            binding?.quantity?.text.toString(),
+            userid.toString(),
+            navigationArgs2.id,
+            navigationArgs2.refrence,
+            navigationArgs2.nameproduct,
+            navigationArgs2.price.toString()
 
-    )
-    val action = OrderProductCompanyFragmentDirections.actionOrderProductCompanyFragmentToListFragment()
-    findNavController().navigate(action)
+        )
+        Log.e("TAG", "addOrder:${viewModel.littitude.value} ")
+        val action =
+            OrderProductCompanyFragmentDirections.actionOrderProductCompanyFragmentToListFragment()
+        findNavController().navigate(action)
+    }
 
 }
 
@@ -77,30 +83,20 @@ fun addOrder(){
         binding?.price?.text=navigationArgs2.price.toString()
         binding?.quantity?.text=navigationArgs2.quantity.toString()
 
-
         binding?.send?.setOnClickListener {
          showConfirmationDialog()
         }
+        binding?.location?.setOnClickListener {
+            val action = OrderProductCompanyFragmentDirections.actionOrderProductCompanyFragmentToMapsFragment()
+            findNavController().navigate(action)
+
+        }
 
     }
-//    fun openMap(lat:Double,lon:Double) {
-//        val packName = GOOGLE_MAPS_APP
-//        val uri = Uri.parse("geo:$lat,$lon?q=$lat,$lon")
-//        val intent = Intent(Intent.ACTION_VIEW, uri)
-//
-//        intent.setPackage(packName);
-//        if (intent.resolveActivity(requireContext().packageManager) != null) {
-//            context?.startActivity(intent)
-//        } else {
-//            openMapOptions(lat, lon)
-//        }
-//
-//    }
-//    private fun openMapOptions(lat: Double, lon: Double) {
-//        val intent = Intent(
-//            Intent.ACTION_VIEW,
-//            Uri.parse("geo:$lat,$lon?q=$lat,$lon")
-//        )
-//        context?.startActivity(intent)
-//    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
+    }
 }

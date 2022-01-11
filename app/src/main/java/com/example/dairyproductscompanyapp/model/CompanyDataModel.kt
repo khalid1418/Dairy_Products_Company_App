@@ -1,6 +1,7 @@
 package com.example.dairyproductscompanyapp.model
 
 import androidx.core.location.LocationRequestCompat
+import com.google.firebase.firestore.GeoPoint
 import java.lang.ref.Reference
 
 
@@ -22,5 +23,6 @@ data class OrderDataModel(
     val reference:String="",
     val nameProduct: String="",
     val price: Int=0,
+    val location:GeoPoint?=GeoPoint(0.0 , 0.0),
     var document:String=""
 )
