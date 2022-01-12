@@ -96,5 +96,14 @@
             app:layout_constraintBottom_toTopOf="@+id/quantity"
             app:layout_constraintStart_toEndOf="@+id/textView6" />
 
+        <Button
+            android:id="@+id/location"
+            android:layout_width="261dp"
+            android:layout_height="54dp"
+            android:text="Location"
+            app:layout_constraintBottom_toTopOf="@+id/send"
+            app:layout_constraintEnd_toEndOf="@+id/send"
+            app:layout_constraintStart_toStartOf="@+id/send" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

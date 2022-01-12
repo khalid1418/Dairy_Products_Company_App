@@ -1,16 +1,21 @@
 package com.example.dairyproductscompanyapp.orderProduct
 
 import android.net.Uri
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.dairyproductscompanyapp.domain.OrderAddProductUseCase
 import com.example.dairyproductscompanyapp.domain.RetrieveUseCase
 import com.example.dairyproductscompanyapp.model.CompanyDataModel
 import com.example.dairyproductscompanyapp.model.OrderDataModel
+import com.google.firebase.firestore.GeoPoint
 import kotlinx.coroutines.launch
 
 class OrderProductCompanyViewModel(private val orderAddProductUseCase: OrderAddProductUseCase):ViewModel() {
 
+    var longtitude = MutableLiveData<String>()
+    var littitude = MutableLiveData<String>()
 
 
     private fun insertOrderProduct(product: OrderDataModel){
@@ -21,7 +26,7 @@ class OrderProductCompanyViewModel(private val orderAddProductUseCase: OrderAddP
 
     private fun getNewProductEntry(
         quantity: String,
-        buyerid: String,userId:String , refrence:String,nameProduct:String , price:String
+        buyerid: String,userId:String , refrence:String,nameProduct:String , price:String,
 
     ): OrderDataModel {
         return OrderDataModel(
@@ -29,7 +34,8 @@ class OrderProductCompanyViewModel(private val orderAddProductUseCase: OrderAddP
             buyerId = buyerid,
             userId,refrence,
             nameProduct = nameProduct,
-            price = price.toInt()
+            price = price.toInt(),
+            location = littitude.value?.let { longtitude.value?.let { it1 -> GeoPoint(it.toDouble(), it1.toDouble()) } },
 
         )
     }

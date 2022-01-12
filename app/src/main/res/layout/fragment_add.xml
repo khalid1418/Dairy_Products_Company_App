@@ -8,12 +8,13 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/name_company"
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="58dp"
         android:layout_marginStart="5dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:hint="@string/name_company"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image_company">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_name_company"
@@ -28,10 +29,9 @@
         android:layout_width="200dp"
         android:layout_height="58dp"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginBottom="300dp"
+        android:layout_marginTop="64dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:hint="@string/name_product"
-        app:layout_constraintBottom_toTopOf="@+id/Add_product"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_phone_number">
 
@@ -45,10 +45,11 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/edit_phone_number"
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="58dp"
         android:layout_marginStart="5dp"
         android:hint="@string/phone_number"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_company">
 
@@ -61,29 +62,36 @@
 
     <ImageButton
         android:id="@+id/image_company"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="4dp"
-        android:padding="6dp"
+        android:layout_width="139dp"
+        android:layout_height="143dp"
         android:focusable="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:padding="6dp"
         android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:src="@tools:sample/avatars" />
 
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/price"
-        android:layout_width="124dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginBottom="232dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="183dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="64dp"
         android:hint="@string/price"
         android:numeric="integer"
-        app:layout_constraintBottom_toTopOf="@+id/Add_product"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
-        app:layout_constraintStart_toEndOf="@+id/name_product" />
+        app:layout_constraintStart_toEndOf="@+id/name_product"
+        app:layout_constraintTop_toBottomOf="@+id/edit_phone_number">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/price_add"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:phoneNumber="true" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <Button
         android:id="@+id/Add_product"

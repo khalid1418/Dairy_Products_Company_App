@@ -87,6 +87,9 @@
         <argument
             android:name="refrence"
             app:argType="string" />
+        <action
+            android:id="@+id/action_orderProductCompanyFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
     </fragment>
     <fragment
         android:id="@+id/editProductFragment"
@@ -123,4 +126,13 @@
         android:name="com.example.dairyproductscompanyapp.orderListUi.OrderListFragment"
         android:label="fragment_order_list"
         tools:layout="@layout/fragment_order_list" />
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.example.dairyproductscompanyapp.utils.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" >
+        <action
+            android:id="@+id/action_mapsFragment_to_orderProductCompanyFragment"
+            app:destination="@id/orderProductCompanyFragment" />
+    </fragment>
 </navigation>

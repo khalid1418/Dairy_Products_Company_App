@@ -38,7 +38,6 @@ class CompanyFireStoreDataSource(
                     Log.e("TAG", "DocumentSnapshot added with ID: ${documentReference}")
 
 
-                    return@addOnSuccessListener
                 }
                 .addOnFailureListener { e ->
                     Log.w("TAG", "Error adding document", e)

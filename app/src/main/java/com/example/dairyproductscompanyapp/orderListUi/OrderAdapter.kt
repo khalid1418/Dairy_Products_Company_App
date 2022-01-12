@@ -1,11 +1,14 @@
 package com.example.dairyproductscompanyapp.orderListUi
 
+import android.content.Intent
 import android.graphics.Paint
+import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -49,7 +52,15 @@ class OrderAdapter(private val viewModel: OrderListViewModel) :
                         viewModel.deleteOrderDone(dataModel)
                     }
                     toggleStrikeThrough(nameProduct, price, quantity, isChecked)
+
                 }
+                binding.locationGo.setOnClickListener {
+                    val gmmIntentUri = Uri.parse("geo:0,0?q=${dataModel.location?.latitude},${dataModel.location?.longitude}")
+                    val mapIntent = Intent(Intent.ACTION_VIEW,gmmIntentUri)
+                        it.context.startActivity(mapIntent)
+
+                }
+
 
 
             }
@@ -87,6 +98,10 @@ class OrderAdapter(private val viewModel: OrderListViewModel) :
 
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
         val current = getItem(position)
+
         holder.bind(current, viewModel)
+
+
     }
+
 }
