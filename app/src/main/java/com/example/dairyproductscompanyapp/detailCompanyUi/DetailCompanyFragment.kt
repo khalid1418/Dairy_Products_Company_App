@@ -107,8 +107,4 @@ binding?.plusOne?.setOnClickListener {
         super.onDestroyView()
         _binding = null
     }
-
-
-
-
 }
