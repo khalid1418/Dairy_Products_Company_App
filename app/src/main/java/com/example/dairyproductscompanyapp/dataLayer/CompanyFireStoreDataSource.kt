@@ -112,14 +112,7 @@ class CompanyFireStoreDataSource(
     }
 
     override suspend fun editProduct(product: CompanyDataModel, id: String, image: Uri?) {
-//        if (image.toString().contains("https:")) {
-//            val db = firebaseFirestore
-//            product.reference = id
-//            db.collection("product").document(product.reference)
-//                .set(product)
-//                .addOnCompleteListener { documentReference ->
-//                    Log.e("TAG", "editProduct:${documentReference.result}")
-//                }
+
         if (image != null) {
             upload(image).collect {
                 val db = firebaseFirestore
@@ -136,7 +129,7 @@ class CompanyFireStoreDataSource(
                     }
             }
         } else {
-            val db = firebaseFirestore
+            val db = Firebase.firestore
             product.reference = id
             db.collection("product").document(product.reference)
                 .set(product)

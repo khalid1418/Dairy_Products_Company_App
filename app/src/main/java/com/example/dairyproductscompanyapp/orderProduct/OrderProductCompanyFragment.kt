@@ -35,9 +35,7 @@ class OrderProductCompanyFragment : Fragment() {
     private val userid = Firebase.auth.currentUser?.uid
 
 fun addOrder(){
-    if (viewModel.longtitude.value?.toDouble() == null){
-        Toast.makeText(context, "pleases pick location", Toast.LENGTH_SHORT).show()
-    }else {
+
         viewModel.addNewOrder(
             binding?.quantity?.text.toString(),
             userid.toString(),
@@ -51,7 +49,7 @@ fun addOrder(){
         val action =
             OrderProductCompanyFragmentDirections.actionOrderProductCompanyFragmentToListFragment()
         findNavController().navigate(action)
-    }
+
 
 }
 
@@ -86,7 +84,11 @@ fun addOrder(){
         binding?.quantity?.text=navigationArgs2.quantity.toString()
 
         binding?.send?.setOnClickListener {
-         showConfirmationDialog()
+            if (viewModel.longtitude.value?.toDouble() == null){
+                Toast.makeText(context, "pleases pick location", Toast.LENGTH_SHORT).show()
+            }else{
+                showConfirmationDialog()
+            }
         }
         binding?.location?.setOnClickListener {
             val action = OrderProductCompanyFragmentDirections.actionOrderProductCompanyFragmentToMapsFragment()

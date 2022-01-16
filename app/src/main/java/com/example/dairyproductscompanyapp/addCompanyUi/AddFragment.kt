@@ -88,8 +88,7 @@ class AddFragment : Fragment() {
                 binding?.editPhoneNumber1?.text.toString(),
                 binding?.editNameProduct?.text.toString(),
                 binding?.priceAdd?.text.toString(),
-                 "",fileImage ,
-                userId!!
+                 "",fileImage ,userId!!
 
             )
             val action = AddFragmentDirections.actionAddFragmentToListFragment()

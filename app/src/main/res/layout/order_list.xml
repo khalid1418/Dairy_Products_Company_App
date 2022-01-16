@@ -69,15 +69,18 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/quantity" />
 
-            <Button
+            <ImageView
                 android:id="@+id/location_go"
-                android:layout_width="105dp"
-                android:layout_height="37dp"
+                android:layout_width="56dp"
+                android:layout_height="43dp"
+                android:src="@drawable/ic_baseline_location_on_24"
                 android:text="location"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/delete_button"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/checkBox4"
-                app:layout_constraintTop_toBottomOf="@+id/price" />
+                app:layout_constraintTop_toBottomOf="@+id/price"
+                app:layout_constraintVertical_bias="1.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

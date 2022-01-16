@@ -19,11 +19,14 @@
         <action
             android:id="@+id/action_listFragment_to_orderListFragment"
             app:destination="@id/orderListFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/addFragment"
         android:name="com.example.dairyproductscompanyapp.addCompanyUi.AddFragment"
-        android:label="@string/add_fragment"
+        android:label="AddProduct"
         tools:layout="@layout/fragment_add" >
         <action
             android:id="@+id/action_addFragment_to_listFragment"
@@ -32,7 +35,7 @@
     <fragment
         android:id="@+id/detailCompanyFragment"
         android:name="com.example.dairyproductscompanyapp.detailCompanyUi.DetailCompanyFragment"
-        android:label="fragment_detail_company"
+        android:label="DetailCompany"
         tools:layout="@layout/fragment_detail_company" >
         <argument
             android:name="namecompany"
@@ -65,7 +68,7 @@
     <fragment
         android:id="@+id/orderProductCompanyFragment"
         android:name="com.example.dairyproductscompanyapp.orderProduct.OrderProductCompanyFragment"
-        android:label="fragment_order_product_company"
+        android:label="InvoicePage"
         tools:layout="@layout/fragment_order_product_company" >
         <argument
             android:name="quantity"
@@ -94,7 +97,7 @@
     <fragment
         android:id="@+id/editProductFragment"
         android:name="com.example.dairyproductscompanyapp.editProductUi.EditProductFragment"
-        android:label="fragment_edit_product"
+        android:label="EditProduct"
         tools:layout="@layout/fragment_edit_product" >
         <argument
             android:name="namecompany"
@@ -124,15 +127,19 @@
     <fragment
         android:id="@+id/orderListFragment"
         android:name="com.example.dairyproductscompanyapp.orderListUi.OrderListFragment"
-        android:label="fragment_order_list"
+        android:label="OrdersPage"
         tools:layout="@layout/fragment_order_list" />
     <fragment
         android:id="@+id/mapsFragment"
         android:name="com.example.dairyproductscompanyapp.utils.MapsFragment"
-        android:label="fragment_maps"
+        android:label="Maps"
         tools:layout="@layout/fragment_maps" >
         <action
             android:id="@+id/action_mapsFragment_to_orderProductCompanyFragment"
             app:destination="@id/orderProductCompanyFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.dairyproductscompanyapp.utils.SettingsFragment"
+        android:label="Setting" />
 </navigation>

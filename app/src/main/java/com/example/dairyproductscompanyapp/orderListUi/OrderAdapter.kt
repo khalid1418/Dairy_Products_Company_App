@@ -93,7 +93,7 @@ class OrderAdapter(private val viewModel: OrderListViewModel) :
         parent: ViewGroup,
         viewType: Int
     ): OrderAdapter.OrderViewHolder {
-        return OrderAdapter.OrderViewHolder(OrderListBinding.inflate(LayoutInflater.from(parent.context)))
+        return OrderAdapter.OrderViewHolder(OrderListBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
 
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {

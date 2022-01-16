@@ -1,0 +1,15 @@
+<resources>
+    <!-- Reply Preference -->
+    <string-array name="them_setting">
+        <item>Dark Them</item>
+        <item>Light Them</item>
+        <item>System Default  </item>
+    </string-array>
+
+    <string-array name="themes_values">
+        <item>@string/dark_theme_preference_value</item>
+        <item>@string/light_theme_preference_value</item>
+        <item>@string/system_theme_preference_value</item>
+    </string-array>
+
+</resources>
