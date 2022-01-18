@@ -39,12 +39,17 @@ import javax.security.auth.Destroyable
 class ListFragment : Fragment() {
     private var _binding: FragmentListBinding? = null
     private val binding get() = _binding
-    lateinit var ss:Menu
+    var menu123: Menu ?= null
+
+
+
+    var isSignIn: Boolean = true
+
     private val viewModel: ListCompanyViewModel by activityViewModels {
         ViewModelFactory()
     }
 
-    private var isSignIn = true
+
     private val signInLauncher = registerForActivityResult(
         FirebaseAuthUIActivityResultContract()
     ) { res ->
@@ -65,8 +70,8 @@ class ListFragment : Fragment() {
 
         if (result.resultCode == Activity.RESULT_OK && response?.isNewUser == true) {
             val user = FirebaseAuth.getInstance().currentUser
-            viewModel.addProfile(UserProfile(user?.displayName.toString() ,user?.email.toString()))
-
+            viewModel.addProfile(UserProfile(user?.displayName.toString(), user?.email.toString()))
+            isSignIn = true
 
             // ...
         } else {
@@ -88,6 +93,12 @@ class ListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+        val currentUser = Firebase.auth.currentUser
+
+        if (currentUser == null){
+            isSignIn=false
+
+        }
     }
 
     override fun onCreateView(
@@ -102,7 +113,7 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Log.e("hussain", "onViewCreated: onViewCreated ", )
+
 
 
         var adapter = CompanyListAdapter {
@@ -119,9 +130,6 @@ class ListFragment : Fragment() {
             this.findNavController().navigate(action)
 
 
-
-
-
         }
 
         binding?.recyclerView?.adapter = adapter
@@ -133,22 +141,12 @@ class ListFragment : Fragment() {
         })
 
 
-        val auth = Firebase.auth
-        binding?.addButton?.setOnClickListener {
-            checkUserSignIn()
-
-
-//            Log.e("TAG", "www:${viewModel.company.value}")
-        }
-
     }
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        Log.e("hussain", "onCreateOptionsMenu: onCreateOptionsMenu ", )
-       ss = menu
+        this.menu123 = menu
         inflater.inflate(R.menu.list_menu, menu)
-        onPrepareOptionsMenu(menu = menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -156,14 +154,15 @@ class ListFragment : Fragment() {
             R.id.sign_in -> {
                 signInLauncher.launch(signInIntent)
 
-
             }
             R.id.sign_out -> {
+
                 AuthUI.getInstance()
                     .signOut(requireContext())
                     .addOnCompleteListener {
+                        isSignIn = false
+                        update()
                         Toast.makeText(context, "LogOut", Toast.LENGTH_SHORT).show()
-
                     }
                 isSignIn = true
             }
@@ -177,25 +176,24 @@ class ListFragment : Fragment() {
         return true
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        Log.e("hussain", "onPrepareOptionsMenu: here ", )
-        if (isSignIn) {
-            menu.findItem(R.id.sign_in).isVisible = true
-            menu.findItem(R.id.sign_out).isVisible = false
-        } else {
-            menu.findItem(R.id.sign_out).isVisible = true
-            menu.findItem(R.id.sign_in).isVisible = false
+
+
+
+    fun update(){
+
+        Log.e("TAG1", "onPrepareOptionsMenu: here $isSignIn")
+        if (menu123 != null) {
+            if (isSignIn) {
+                menu123?.findItem(R.id.sign_in)?.isVisible = false
+                menu123?.findItem(R.id.sign_out)?.isVisible=true
+            } else {
+                menu123?.findItem(R.id.sign_in)?.isVisible = true
+                menu123?.findItem(R.id.sign_out)?.isVisible=false
+            }
         }
     }
 
 
-    override fun onStart() {
-        super.onStart()
-        val currentUser = Firebase.auth.currentUser
-        if (currentUser != null) {
-            isSignIn = false
-        }
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -214,4 +212,33 @@ class ListFragment : Fragment() {
 //        }
 //        super.onResume()
 //    }
+
+
+    override fun onResume() {
+        super.onResume()
+        val currentUser = Firebase.auth.currentUser
+        if (currentUser != null) {
+            isSignIn = true
+            Log.e("TAG", "onResume2:$isSignIn ", )
+
+        }else{
+            isSignIn=false
+        }
+        update()
+
+
+
+        Log.e("TAG1", "onresume: $isSignIn")
+
+    }
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        Log.e("hussain", "onPrepareOptionsMenu: here $isSignIn")
+        if (isSignIn) {
+            menu.findItem(R.id.sign_in).isVisible = false
+            menu.findItem(R.id.sign_out).isVisible = true
+        } else {
+            menu.findItem(R.id.sign_out).isVisible = false
+            menu.findItem(R.id.sign_in).isVisible = true
+        }
+    }
 }

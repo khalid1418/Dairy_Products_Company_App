@@ -77,7 +77,7 @@ binding?.plusOne?.setOnClickListener {
                         )
                     findNavController().navigate(action)
                 }else{
-                    Toast.makeText(context, "YOU NOT SIGNIN", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.toast_sign_in), Toast.LENGTH_SHORT).show()
                 }
             }
 

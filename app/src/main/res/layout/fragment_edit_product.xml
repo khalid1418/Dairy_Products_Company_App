@@ -100,20 +100,9 @@
 </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/Add_product"
-        android:layout_width="209dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/add_product"
-        app:layout_constraintBottom_toTopOf="@+id/Save_product"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
         android:id="@+id/Save_product"
         android:layout_width="209dp"
         android:layout_height="47dp"
-        android:layout_marginBottom="52dp"
         android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

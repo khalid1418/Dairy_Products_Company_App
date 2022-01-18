@@ -27,36 +27,36 @@
     <string name="done">Done</string>
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
+    <string name="sync_header" translatable="false">Sync</string>
 
     <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
+    <string name="signature_title" translatable="false">Your signature</string>
+    <string name="reply_title" translatable="false">Default reply action</string>
 
     <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    <string name="sync_title" translatable="false">Sync email periodically</string>
+    <string name="attachment_title" translatable="false">Download incoming attachments</string>
+    <string name="attachment_summary_on" translatable="false">Automatically download attachments for incoming emails
     </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
-    <string name="them">theme</string>
+    <string name="attachment_summary_off" translatable="false">Only download attachments when manually requested</string>
+    <string name="them" translatable="false">theme</string>
     <!--    <string name="theme_preference_key">KeyPref</string>-->
     <string name="dark_theme_description">DarkTheme</string>
     <string name="light_theme_description">LightTheme</string>
-    <string name="system_theme_description">SystemTheme</string>
-    <string name="title_activity_main_splash_screen">MainActivitySplashScreen</string>
+    <string name="system_theme_description" translatable="false">SystemTheme</string>
+    <string name="title_activity_main_splash_screen" translatable="false">MainActivitySplashScreen</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
     <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="previous" translatable="false">Previous</string>
     <string name="dark_theme_preference_value">DarkThem</string>
     <string name="light_theme_preference_value">LightThem</string>
-    <string name="system_theme_preference_value">System Default</string>
+    <string name="system_theme_preference_value" translatable="false">System Default</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="theme_preference_key">ThemeKey</string>
+    <string name="hello_first_fragment" translatable="false">Hello first fragment</string>
+    <string name="hello_second_fragment" translatable="false">Hello second fragment. Arg: %1$s</string>
+    <string name="theme_preference_key" translatable="false">ThemeKey</string>
     <string name="add">add</string>
     <string name="profile">profile</string>
     <string name="home">home</string>
@@ -65,5 +65,6 @@
     <string name="email">Email</string>
     <string name="name">Name</string>
     <string name="name_profile">Name Profile</string>
+    <string name="toast_sign_in">YOU NOT SIGNIN</string>
     <!--    <string name="quantity">quantity %s</string>-->
 </resources>

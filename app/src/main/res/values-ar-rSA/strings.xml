@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Dairy Products Company App</string>
+    <string name="sign_in">تسجيل دخول</string>
+    <string name="login">تسجيل دخول</string>
+    <string name="sign_out">تسجيل خروج</string>
+    <string name="name_company">اسم الشركة</string>
+    <string name="phone_number">رقم الجوال</string>
+    <string name="add_product">اضف منتج</string>
+    <string name="save">حفظ</string>
+    <string name="name_product">منتج جديد</string>
+    <string name="price">السعر</string>
+    <string name="nameproduct">اسم المنتج</string>
+    <string name="phonecompany">رقم الهاتف</string>
+    <string name="sendorder">ارسل الطلب</string>
+    <string name="titleDialog">ارسل الطلب</string>
+    <string name="dialogMassage">هل انت متأكد</string>
+    <string name="canceldialog">الغاء</string>
+    <string name="sendDialog">ارسال</string>
+    <string name="button">زر</string>
+    <string name="order">طلب</string>
+    <string name="edit">تعديل</string>
+    <string name="quantity">الكمية</string>
+    <string name="add_fragment">اضف شركة</string>
+    <string name="my_customer_order">الطلبات</string>
+    <string name="check_if_you_done">اضغط اذا اكتمل الطلب</string>
+    <string name="done">اكتمل</string>
+    <string name="messages_header">رسالة</string>
+    <string name="dark_theme_description">الوضع اليلي</string>
+    <string name="light_theme_description">الوضع الساطع</string>
+    <string name="next">التالي</string>
+    <string name="dark_theme_preference_value">الوضع اليلي</string>
+    <string name="light_theme_preference_value">وضع السطوع</string>
+    <string name="add">اضافة</string>
+    <string name="profile">الملف الشخصي</string>
+    <string name="home">المنزل</string>
+    <string name="setting">اعدادات</string>
+    <string name="date_of_birth">يوم الميلاد</string>
+    <string name="email">بريد الاكتروني</string>
+    <string name="name">الاسم</string>
+    <string name="name_profile">اسم الملف الشخصي</string>
+    <string name="toast_sign_in">انت لست مسجل دخول</string>
+
+</resources>
