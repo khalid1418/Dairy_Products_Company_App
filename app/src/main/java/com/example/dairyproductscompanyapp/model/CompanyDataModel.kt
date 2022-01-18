@@ -1,7 +1,9 @@
 package com.example.dairyproductscompanyapp.model
 
 import androidx.core.location.LocationRequestCompat
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.GeoPoint
+import com.google.firebase.ktx.Firebase
 import java.lang.ref.Reference
 
 
@@ -25,4 +27,10 @@ data class OrderDataModel(
     val price: Int=0,
     val location:GeoPoint?=GeoPoint(0.0 , 0.0),
     var document:String=""
+)
+data class UserProfile(
+    val userName:String = "",
+    val userEmail:String = "",
+    val userBirth:String = "",
+    var imageView:String = ""
 )

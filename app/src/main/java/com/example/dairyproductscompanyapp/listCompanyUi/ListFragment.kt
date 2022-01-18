@@ -22,6 +22,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.dairyproductscompanyapp.R
 import com.example.dairyproductscompanyapp.databinding.FragmentListBinding
 import com.example.dairyproductscompanyapp.model.CompanyDataModel
+import com.example.dairyproductscompanyapp.model.UserProfile
 import com.example.dairyproductscompanyapp.utils.ViewModelFactory
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
@@ -61,9 +62,12 @@ class ListFragment : Fragment() {
 
     private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
         val response = result.idpResponse
-        if (result.resultCode == Activity.RESULT_OK) {
-            // Successfully signed in
+
+        if (result.resultCode == Activity.RESULT_OK && response?.isNewUser == true) {
             val user = FirebaseAuth.getInstance().currentUser
+            viewModel.addProfile(UserProfile(user?.displayName.toString() ,user?.email.toString()))
+
+
             // ...
         } else {
             // Sign in failed. If response is null the user canceled the
@@ -139,6 +143,7 @@ class ListFragment : Fragment() {
 
     }
 
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         Log.e("hussain", "onCreateOptionsMenu: onCreateOptionsMenu ", )
        ss = menu
@@ -162,12 +167,12 @@ class ListFragment : Fragment() {
                     }
                 isSignIn = true
             }
-            R.id.order_buyer -> {
-                findNavController().navigate(R.id.action_listFragment_to_orderListFragment)
-            }
-            R.id.settingsFragment -> {
-                findNavController().navigate(R.id.action_listFragment_to_settingsFragment)
-            }
+//            R.id.order_buyer -> {
+//                findNavController().navigate(R.id.action_listFragment_to_orderListFragment)
+//            }
+//            R.id.settingsFragment -> {
+//                findNavController().navigate(R.id.action_listFragment_to_settingsFragment)
+//            }
         }
         return true
     }

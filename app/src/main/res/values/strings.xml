@@ -40,7 +40,7 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="them">theme</string>
-<!--    <string name="theme_preference_key">KeyPref</string>-->
+    <!--    <string name="theme_preference_key">KeyPref</string>-->
     <string name="dark_theme_description">DarkTheme</string>
     <string name="light_theme_description">LightTheme</string>
     <string name="system_theme_description">SystemTheme</string>
@@ -57,5 +57,13 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="theme_preference_key">ThemeKey</string>
+    <string name="add">add</string>
+    <string name="profile">profile</string>
+    <string name="home">home</string>
+    <string name="setting">setting</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="email">Email</string>
+    <string name="name">Name</string>
+    <string name="name_profile">Name Profile</string>
     <!--    <string name="quantity">quantity %s</string>-->
 </resources>
