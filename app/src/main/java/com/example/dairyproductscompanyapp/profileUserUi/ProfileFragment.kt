@@ -68,7 +68,29 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (Firebase.auth.currentUser?.uid == null || Firebase.auth.currentUser?.uid == "") {
 
+        } else {
+
+            viewModel.userInfoLiveData.observe(viewLifecycleOwner, {
+                binding?.nameProfile?.text = it.userName
+                binding?.emailProfile?.text = it.userEmail
+                binding?.dateBirth?.text = it.userBirth
+                Glide.with(binding!!.profileImage)
+                    .load(it.imageView).placeholder(R.drawable.loading_animation)
+                    .circleCrop()
+                    .error(R.drawable.ic_baseline_account_circle_24)
+                    .into(binding!!.profileImage)
+
+                Log.e("TAG", "onViewCreated:${it.userEmail} ")
+
+            })
+
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
         if (Firebase.auth.currentUser?.uid == null || Firebase.auth.currentUser?.uid == "") {
 
         } else {

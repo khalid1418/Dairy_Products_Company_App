@@ -51,7 +51,7 @@
             app:argType="string" />
         <argument
             android:name="price"
-            app:argType="integer" />
+            app:argType="string" />
         <argument
             android:name="image"
             app:argType="string" />
@@ -83,7 +83,7 @@
             app:argType="string" />
         <argument
             android:name="price"
-            app:argType="integer" />
+            app:argType="string" />
         <argument
             android:name="id"
             app:argType="string" />
@@ -116,7 +116,7 @@
             app:argType="string" />
         <argument
             android:name="price"
-            app:argType="integer" />
+            app:argType="string" />
         <argument
             android:name="userId"
             app:argType="string" />

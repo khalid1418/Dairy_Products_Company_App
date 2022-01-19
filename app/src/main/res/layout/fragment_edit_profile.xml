@@ -11,6 +11,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageButton
+            android:id="@+id/date_picker"
+            android:layout_width="48dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_baseline_date_range_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/email"
+            tools:ignore="SpeakableTextPresentCheck" />
+
         <ImageView
             android:id="@+id/profile_image"
             android:layout_width="232dp"
@@ -62,20 +71,18 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/date_of_birth"
-            android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:layout_marginStart="5dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="362dp"
+            android:layout_height="57dp"
             android:hint="DateBirth"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/email">
 
-<com.google.android.material.textfield.TextInputEditText
-    android:id="@+id/edit_birth_date"
-    android:numeric="integer"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
-
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_birth_date"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:numeric="integer" />
 
 
         </com.google.android.material.textfield.TextInputLayout>

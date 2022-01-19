@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Dairy Products Company App</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sign_in">sign in</string>
     <string name="login">login</string>
     <string name="sign_out">Sign out</string>
@@ -44,7 +43,7 @@
     <string name="dark_theme_description">DarkTheme</string>
     <string name="light_theme_description">LightTheme</string>
     <string name="system_theme_description" translatable="false">SystemTheme</string>
-    <string name="title_activity_main_splash_screen" translatable="false">MainActivitySplashScreen</string>
+    <string name="title_activity_main_splash_screen" translatable="false">Dairy App</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label" translatable="false">First Fragment</string>
     <string name="second_fragment_label" translatable="false">Second Fragment</string>

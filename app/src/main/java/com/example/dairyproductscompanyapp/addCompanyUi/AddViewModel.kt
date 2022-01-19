@@ -1,6 +1,7 @@
 package com.example.dairyproductscompanyapp.addCompanyUi
 
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.dairyproductscompanyapp.model.CompanyDataModel
@@ -28,10 +29,11 @@ class AddViewModel(private val addUseCase: AddUseCase) : ViewModel() {
             nameCompany = Name,
             phone = phone.toInt(),
             nameProduct = NameProduct,
-            price = price.toInt(),
+            price = price.toDouble(),
             image = imageView,
             userid = id
         )
+
     }
 
     fun addNewProduct(
@@ -51,7 +53,7 @@ class AddViewModel(private val addUseCase: AddUseCase) : ViewModel() {
         phone: String,
         nameProduct: String,
         price: String,
-        imageView: String
+        imageView: String,
     ): Boolean {
         if (name.isBlank() || phone.isBlank() || nameProduct.isBlank() || price.isBlank() || imageView.isBlank()) {
             return false

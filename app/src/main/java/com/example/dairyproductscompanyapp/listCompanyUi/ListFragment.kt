@@ -1,23 +1,12 @@
 package com.example.dairyproductscompanyapp.listCompanyUi
 
-import android.annotation.SuppressLint
 import android.app.Activity
-import android.graphics.drawable.InsetDrawable
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.util.TypedValue
 import android.view.*
-import android.widget.PopupMenu
 import android.widget.Toast
-import androidx.annotation.MenuRes
-import androidx.appcompat.view.menu.MenuBuilder
-import androidx.core.graphics.green
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.dairyproductscompanyapp.R
 import com.example.dairyproductscompanyapp.databinding.FragmentListBinding
@@ -30,10 +19,7 @@ import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.observeOn
-import kotlinx.coroutines.launch
-import javax.security.auth.Destroyable
+import java.text.NumberFormat
 
 
 class ListFragment : Fragment() {
@@ -117,16 +103,18 @@ class ListFragment : Fragment() {
 
 
         var adapter = CompanyListAdapter {
-            Log.e("TAG", "id:${it.userid}")
+            Log.e("TAG", "price1:${it.price}")
             val action = ListFragmentDirections.actionListFragmentToDetailCompanyFragment(
                 it.nameCompany,
                 it.phone,
                 it.nameProduct,
-                it.price,
+                NumberFormat.getCurrencyInstance().format(it.price),
                 it.image,
                 it.userid,
                 it.reference
             )
+            Log.e("TAG", "price1:${it.price}")
+
             this.findNavController().navigate(action)
 
 

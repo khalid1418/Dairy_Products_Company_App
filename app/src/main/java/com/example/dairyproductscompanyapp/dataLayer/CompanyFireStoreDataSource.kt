@@ -22,6 +22,8 @@ class CompanyFireStoreDataSource(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : CompanyDataSource {
 
+
+//this function to add New Product
     override suspend fun addProduct(product: CompanyDataModel, imageURI: Uri) {
         upload(imageURI).collect {
 
@@ -48,8 +50,7 @@ class CompanyFireStoreDataSource(
         }
 
     }
-
-
+//this function to upload a image from firebase storage
     suspend fun upload(file: Uri): Flow<Uri> = callbackFlow {
 
 
@@ -70,6 +71,7 @@ class CompanyFireStoreDataSource(
 
     }
 
+//this function to get all information from firebase with collection name {product}
     override suspend fun retrieveCompanyData(): Flow<List<CompanyDataModel>> =
         callbackFlow {
 
@@ -96,7 +98,7 @@ class CompanyFireStoreDataSource(
             }
             awaitClose { }
         }
-
+//this function to save order into Firestore
     override suspend fun sendOrderProduct(product: OrderDataModel) {
         val db = firebaseFirestore
        val path =  db.collection("order").document()
@@ -112,7 +114,7 @@ class CompanyFireStoreDataSource(
             }
 
     }
-
+//this function to edit product from Firestore
     override suspend fun editProduct(product: CompanyDataModel, id: String, image: Uri?) {
 
         if (image != null) {
@@ -140,7 +142,7 @@ class CompanyFireStoreDataSource(
                 }
         }
     }
-
+// this function to get order from Firestore
     override suspend fun retrieveOrderBuyer(): Flow<List<OrderDataModel>> =
         callbackFlow {
             val db = firebaseFirestore
@@ -167,13 +169,13 @@ class CompanyFireStoreDataSource(
             }
             awaitClose{ }
         }
-
+//this function to delete order from Firestore
     override suspend fun deleteOrderDone(product: OrderDataModel) {
         val db = firebaseFirestore
         val docRef = db.collection("order").document(product.document)
         docRef.delete()
     }
-
+//this function to edit user profile
     override suspend fun editUserInfo(profile: UserProfile , image: Uri?) {
         if (image != null) {
             upload(image).collect {
@@ -202,7 +204,7 @@ class CompanyFireStoreDataSource(
                 }
         }
     }
-
+//this function to get user profile
     override suspend fun getInfoUser():Flow<UserProfile> = callbackFlow {
         val db = firebaseFirestore
         val docRef=db.collection("User").document(Firebase.auth.currentUser!!.uid)
@@ -224,7 +226,7 @@ awaitClose {  }
 
 
     }
-
+//this function to add profile
     override suspend fun addProfile(userProfile: UserProfile) {
         val db = firebaseFirestore
         db.collection("User").document("${Firebase.auth.currentUser?.uid}")
