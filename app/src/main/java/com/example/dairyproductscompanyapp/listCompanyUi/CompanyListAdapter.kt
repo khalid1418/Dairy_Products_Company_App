@@ -60,7 +60,7 @@ class CompanyListAdapter(private val onItemClicked: (CompanyDataModel) -> Unit) 
         viewType: Int
     ): CompanyViewHolder {
         return CompanyViewHolder(
-            CompanyListBinding.inflate(LayoutInflater.from(parent.context))
+            CompanyListBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         )
     }
 

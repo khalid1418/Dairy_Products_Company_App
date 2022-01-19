@@ -4,6 +4,7 @@ import android.net.Uri
 import android.util.Log
 import com.example.dairyproductscompanyapp.model.CompanyDataModel
 import com.example.dairyproductscompanyapp.model.OrderDataModel
+import com.example.dairyproductscompanyapp.model.UserProfile
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
@@ -14,12 +15,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.collect
 import java.util.*
-
 class CompanyFireStoreDataSource(
     private val firebaseFirestore: FirebaseFirestore,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : CompanyDataSource {
+
+
+//this function to add New Product
     override suspend fun addProduct(product: CompanyDataModel, imageURI: Uri) {
         upload(imageURI).collect {
 
@@ -46,8 +50,7 @@ class CompanyFireStoreDataSource(
         }
 
     }
-
-
+//this function to upload a image from firebase storage
     suspend fun upload(file: Uri): Flow<Uri> = callbackFlow {
 
 
@@ -68,6 +71,7 @@ class CompanyFireStoreDataSource(
 
     }
 
+//this function to get all information from firebase with collection name {product}
     override suspend fun retrieveCompanyData(): Flow<List<CompanyDataModel>> =
         callbackFlow {
 
@@ -94,7 +98,7 @@ class CompanyFireStoreDataSource(
             }
             awaitClose { }
         }
-
+//this function to save order into Firestore
     override suspend fun sendOrderProduct(product: OrderDataModel) {
         val db = firebaseFirestore
        val path =  db.collection("order").document()
@@ -110,7 +114,7 @@ class CompanyFireStoreDataSource(
             }
 
     }
-
+//this function to edit product from Firestore
     override suspend fun editProduct(product: CompanyDataModel, id: String, image: Uri?) {
 
         if (image != null) {
@@ -138,7 +142,7 @@ class CompanyFireStoreDataSource(
                 }
         }
     }
-
+// this function to get order from Firestore
     override suspend fun retrieveOrderBuyer(): Flow<List<OrderDataModel>> =
         callbackFlow {
             val db = firebaseFirestore
@@ -165,11 +169,80 @@ class CompanyFireStoreDataSource(
             }
             awaitClose{ }
         }
-
+//this function to delete order from Firestore
     override suspend fun deleteOrderDone(product: OrderDataModel) {
         val db = firebaseFirestore
         val docRef = db.collection("order").document(product.document)
         docRef.delete()
+    }
+//this function to edit user profile
+    override suspend fun editUserInfo(profile: UserProfile , image: Uri?) {
+        if (image != null) {
+            upload(image).collect {
+                profile.imageView = it.toString()
+                val db = firebaseFirestore
+                val docRef = db.collection("User").document(Firebase.auth.currentUser!!.uid)
+                docRef.set(profile)
+                    .addOnCompleteListener { doc ->
+                        Log.e("TAG", "getUserInfowithimage: ${doc.result}",)
+
+                    }
+                    .addOnFailureListener {
+                        Log.e("TAG", "editUserInfo: bad",)
+                    }
+            }
+        }else{
+            val db = firebaseFirestore
+            val docRef = db.collection("User").document(Firebase.auth.currentUser!!.uid)
+            docRef.set(profile)
+                .addOnCompleteListener { doc ->
+                    Log.e("TAG", "getUserInfo: ${doc.result}",)
+
+                }
+                .addOnFailureListener {
+                    Log.e("TAG", "editUserInfo: bad",)
+                }
+        }
+    }
+//this function to get user profile
+    override suspend fun getInfoUser():Flow<UserProfile> = callbackFlow {
+        val db = firebaseFirestore
+        val docRef=db.collection("User").document(Firebase.auth.currentUser!!.uid)
+            docRef.addSnapshotListener { snap, e ->
+                if (e != null){
+
+                }
+
+                if (snap?.data!=null){
+                    val productInfo = snap.toObject(UserProfile::class.java)
+                    trySend(productInfo!!)
+                }
+
+            }
+
+
+awaitClose {  }
+
+
+
+    }
+//this function to add profile
+    override suspend fun addProfile(userProfile: UserProfile) {
+        val db = firebaseFirestore
+        db.collection("User").document("${Firebase.auth.currentUser?.uid}")
+            .set(userProfile)
+            .addOnSuccessListener {
+                Log.d("TAG", "addProfile:$it ")
+            }
+            .addOnFailureListener {
+                Log.e("TAG", "addProfile: $it", )
+            }
+    }
+    companion object{
+        const val PROFILE = "PROFILE"
+        const val USERNAME = "userName"
+        const val USEREMAIL = "userEmail"
+
     }
 
 }

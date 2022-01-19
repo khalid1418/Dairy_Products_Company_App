@@ -42,10 +42,10 @@ fun addOrder(){
             navigationArgs2.id,
             navigationArgs2.refrence,
             navigationArgs2.nameproduct,
-            navigationArgs2.price.toString()
+            navigationArgs2.price
 
         )
-        Log.e("TAG", "addOrder:${viewModel.littitude.value} ")
+        Log.e("TAG", "addOrder:${navigationArgs2.price} ")
         val action =
             OrderProductCompanyFragmentDirections.actionOrderProductCompanyFragmentToListFragment()
         findNavController().navigate(action)
@@ -80,7 +80,7 @@ fun addOrder(){
         super.onViewCreated(view, savedInstanceState)
         binding?.nameCompany?.text = navigationArgs2.namecompany
         binding?.nameProduct?.text = navigationArgs2.nameproduct
-        binding?.price?.text=navigationArgs2.price.toString()
+        binding?.price?.text=navigationArgs2.price
         binding?.quantity?.text=navigationArgs2.quantity.toString()
 
         binding?.send?.setOnClickListener {

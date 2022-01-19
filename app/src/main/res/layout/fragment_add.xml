@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/abstract_background_ripple_milk_illustration_260nw_448145299"
     android:layout_height="match_parent"
     tools:context=".addCompanyUi.AddFragment">
 
@@ -70,7 +71,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars" />
+        tools:src="@drawable/add_image_png_4_transparent_images" />
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -80,7 +81,7 @@
         android:layout_height="58dp"
         android:layout_marginTop="64dp"
         android:hint="@string/price"
-        android:numeric="integer"
+        app:prefixText="$"
         app:layout_constraintStart_toEndOf="@+id/name_product"
         app:layout_constraintTop_toBottomOf="@+id/edit_phone_number">
 
@@ -88,26 +89,17 @@
             android:id="@+id/price_add"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:phoneNumber="true" />
+            android:inputType="numberDecimal"
+            android:singleLine="true"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
 
     <Button
-        android:id="@+id/Add_product"
-        android:layout_width="209dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="12dp"
-        android:text="@string/add_product"
-        app:layout_constraintBottom_toTopOf="@+id/Save_product"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
         android:id="@+id/Save_product"
         android:layout_width="209dp"
-        android:layout_height="47dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="60dp"
         android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -5,9 +5,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.dairyproductscompanyapp.addCompanyUi.AddViewModel
 import com.example.dairyproductscompanyapp.detailCompanyUi.DetailViewModel
 import com.example.dairyproductscompanyapp.editProductUi.EditProductViewModel
+import com.example.dairyproductscompanyapp.editProfileUi.EditProfileViewModel
 import com.example.dairyproductscompanyapp.listCompanyUi.ListCompanyViewModel
 import com.example.dairyproductscompanyapp.orderListUi.OrderListViewModel
 import com.example.dairyproductscompanyapp.orderProduct.OrderProductCompanyViewModel
+import com.example.dairyproductscompanyapp.profileUserUi.UserProfileViewModel
 import java.lang.IllegalArgumentException
 
 class ViewModelFactory() : ViewModelProvider.Factory {
@@ -19,7 +21,7 @@ class ViewModelFactory() : ViewModelProvider.Factory {
             }
             modelClass.isAssignableFrom(ListCompanyViewModel::class.java) -> {
                 @Suppress("UNCHECKED_CAST")
-                return ListCompanyViewModel(providerUseCaseRetrieveCompany()) as T
+                return ListCompanyViewModel(providerUseCaseRetrieveCompany() , providerAddUserInfo()) as T
             }
             modelClass.isAssignableFrom(OrderProductCompanyViewModel::class.java) -> {
                 @Suppress("UNCHECKED_CAST")
@@ -32,6 +34,15 @@ class ViewModelFactory() : ViewModelProvider.Factory {
             modelClass.isAssignableFrom(OrderListViewModel::class.java) -> @Suppress("UNCHECKED_CAST"){
             return OrderListViewModel(providerUseCaseRetrieveOrderBuyer() , providerUseCaseDeleteOrder()) as T
                 }
+            modelClass.isAssignableFrom(EditProfileViewModel::class.java)->{
+                @Suppress("UNCHECKED_CAST")
+                return EditProfileViewModel(providerUseCaseEditProfile()) as T
+            }
+
+            modelClass.isAssignableFrom(UserProfileViewModel::class.java)->{
+                @Suppress("UNCHECKED_CAST")
+                return UserProfileViewModel(providerGetUserInfo()) as T
+            }
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

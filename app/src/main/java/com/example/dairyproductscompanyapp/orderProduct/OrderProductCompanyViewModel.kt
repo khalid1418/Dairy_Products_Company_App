@@ -11,6 +11,7 @@ import com.example.dairyproductscompanyapp.model.CompanyDataModel
 import com.example.dairyproductscompanyapp.model.OrderDataModel
 import com.google.firebase.firestore.GeoPoint
 import kotlinx.coroutines.launch
+import java.text.NumberFormat
 
 class OrderProductCompanyViewModel(private val orderAddProductUseCase: OrderAddProductUseCase):ViewModel() {
 
@@ -34,7 +35,7 @@ class OrderProductCompanyViewModel(private val orderAddProductUseCase: OrderAddP
             buyerId = buyerid,
             userId,refrence,
             nameProduct = nameProduct,
-            price = price.toInt(),
+            price =  price,
             location = littitude.value?.let { longtitude.value?.let { it1 -> GeoPoint(it.toDouble(), it1.toDouble()) } },
 
         )
