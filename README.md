@@ -16,6 +16,9 @@
 9-Profile.
 10-Setting.
 
+
+
+
 ## Technical stuff
 1-MVVM Architecture Patterns.
 2-Clean Code(DataLayer, DomainLayer , UiLayer).
