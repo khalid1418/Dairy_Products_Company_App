@@ -6,15 +6,25 @@
  
 ## Features
 1-Registration page.
-2-Add New Company.                                                     
+
+2-Add New Company.
+
 3-Show List Company.
+
 4-Details Company Product.
+
 5-Edit Company.
+
 6-Order Product.
+
 7-Location.
+
 8-Notification.
+
 9-Profile.
+
 10-Setting.
+
 
 
 
