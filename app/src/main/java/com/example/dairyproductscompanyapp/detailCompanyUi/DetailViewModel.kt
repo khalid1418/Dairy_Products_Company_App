@@ -9,7 +9,7 @@ import com.example.dairyproductscompanyapp.model.OrderDataModel
 import kotlinx.coroutines.launch
 
 class DetailViewModel():ViewModel() {
-    private var _quantity = MutableLiveData<Int>(0)
+    private var _quantity = MutableLiveData(0)
     val quantity: LiveData<Int> = _quantity
 
 fun quantityplus(){

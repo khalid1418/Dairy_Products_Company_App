@@ -17,6 +17,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:background="@drawable/abstract_background_ripple_milk_illustration_260nw_448145299"
         android:layout_height="match_parent">
 
         <Button
@@ -62,7 +63,7 @@
             android:layout_marginTop="172dp"
             android:layout_marginBottom="119dp"
             android:textColor="@color/black"
-            android:textAlignment="textEnd"
+            android:textAlignment="center"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/edit_button"
@@ -76,6 +77,8 @@
             android:layout_marginStart="2dp"
             android:layout_marginTop="172dp"
             android:layout_marginBottom="122dp"
+            android:fontFamily="sans-serif-medium"
+            style="@style/Widget.MaterialComponents.TextView"
             android:text="$52"
             android:textAlignment="center"
             android:textColor="@color/black"
@@ -168,6 +171,29 @@
             app:layout_constraintHorizontal_bias="0.372"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="84dp"
+            android:layout_height="29dp"
+            android:layout_marginEnd="32dp"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:text="@string/price"
+            app:layout_constraintBottom_toTopOf="@+id/price_detail"
+            app:layout_constraintEnd_toStartOf="@+id/plus_one" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="155dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="61dp"
+            android:text="@string/name_product"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/name_product_detail"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

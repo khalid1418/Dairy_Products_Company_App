@@ -5,16 +5,13 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
-import androidx.core.graphics.green
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.dairyproductscompanyapp.R
 import com.example.dairyproductscompanyapp.databinding.FragmentListBinding
 import com.example.dairyproductscompanyapp.model.CompanyDataModel
+import com.example.dairyproductscompanyapp.model.UserProfile
 import com.example.dairyproductscompanyapp.utils.ViewModelFactory
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
@@ -22,21 +19,23 @@ import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.observeOn
-import kotlinx.coroutines.launch
-import javax.security.auth.Destroyable
+import java.text.NumberFormat
 
 
 class ListFragment : Fragment() {
     private var _binding: FragmentListBinding? = null
     private val binding get() = _binding
+    var menu123: Menu ?= null
+
+
+
+    var isSignIn: Boolean = true
 
     private val viewModel: ListCompanyViewModel by activityViewModels {
         ViewModelFactory()
     }
 
-    private var isSignIn = true
+
     private val signInLauncher = registerForActivityResult(
         FirebaseAuthUIActivityResultContract()
     ) { res ->
@@ -54,9 +53,12 @@ class ListFragment : Fragment() {
 
     private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
         val response = result.idpResponse
-        if (result.resultCode == Activity.RESULT_OK) {
-            // Successfully signed in
+
+        if (result.resultCode == Activity.RESULT_OK && response?.isNewUser == true) {
             val user = FirebaseAuth.getInstance().currentUser
+            viewModel.addProfile(UserProfile(user?.displayName.toString(), user?.email.toString()))
+            isSignIn = true
+
             // ...
         } else {
             // Sign in failed. If response is null the user canceled the
@@ -77,7 +79,12 @@ class ListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+        val currentUser = Firebase.auth.currentUser
 
+        if (currentUser == null){
+            isSignIn=false
+
+        }
     }
 
     override fun onCreateView(
@@ -91,26 +98,30 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+
+
         var adapter = CompanyListAdapter {
-            Log.e("TAG","id:${it.userid}")
-            val action = ListFragmentDirections.actionListFragmentToDetailCompanyFragment(it.nameCompany , it.phone , it.nameProduct , it.price , it.image , it.userid , it.reference)
+            Log.e("TAG", "price1:${it.price}")
+            val action = ListFragmentDirections.actionListFragmentToDetailCompanyFragment(
+                it.nameCompany,
+                it.phone,
+                it.nameProduct,
+                NumberFormat.getCurrencyInstance().format(it.price),
+                it.image,
+                it.userid,
+                it.reference
+            )
+            Log.e("TAG", "price1:${it.price}")
+
             this.findNavController().navigate(action)
+
+
         }
 
         binding?.recyclerView?.adapter = adapter
-//        viewModel.company.value.let {
-//            adapter.submitList(it)
-//
-//        }
-//        binding?.recyclerView?.adapter = adapter
-//        lifecycleScope.launch {
-//            repeatOnLifecycle(Lifecycle.State.RESUMED) {
-//
-//                viewModel.company.collect {
-//                    adapter.submitList(it)
-//                }
-//            }
-//        }
+
         viewModel.companyLiveData.observe(viewLifecycleOwner, {
             it.let {
                 adapter.submitList(it)
@@ -118,17 +129,11 @@ class ListFragment : Fragment() {
         })
 
 
-        val auth = Firebase.auth
-        binding?.addButton?.setOnClickListener {
-            checkUserSignIn()
-
-
-            Log.e("TAG", "www:${viewModel.company.value}")
-        }
-
     }
 
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        this.menu123 = menu
         inflater.inflate(R.menu.list_menu, menu)
     }
 
@@ -137,38 +142,46 @@ class ListFragment : Fragment() {
             R.id.sign_in -> {
                 signInLauncher.launch(signInIntent)
 
-
             }
             R.id.sign_out -> {
+
                 AuthUI.getInstance()
                     .signOut(requireContext())
                     .addOnCompleteListener {
+                        isSignIn = false
+                        update()
                         Toast.makeText(context, "LogOut", Toast.LENGTH_SHORT).show()
-
                     }
                 isSignIn = true
             }
+//            R.id.order_buyer -> {
+//                findNavController().navigate(R.id.action_listFragment_to_orderListFragment)
+//            }
+//            R.id.settingsFragment -> {
+//                findNavController().navigate(R.id.action_listFragment_to_settingsFragment)
+//            }
         }
         return true
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        if (isSignIn) {
-            menu.findItem(R.id.sign_in).isVisible = true
-            menu.findItem(R.id.sign_out).isVisible = false
-        } else {
-            menu.findItem(R.id.sign_out).isVisible = true
-            menu.findItem(R.id.sign_in).isVisible = false
+
+
+
+    fun update(){
+
+        Log.e("TAG1", "onPrepareOptionsMenu: here $isSignIn")
+        if (menu123 != null) {
+            if (isSignIn) {
+                menu123?.findItem(R.id.sign_in)?.isVisible = false
+                menu123?.findItem(R.id.sign_out)?.isVisible=true
+            } else {
+                menu123?.findItem(R.id.sign_in)?.isVisible = true
+                menu123?.findItem(R.id.sign_out)?.isVisible=false
+            }
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        val currentUser = Firebase.auth.currentUser
-        if (currentUser != null) {
-            isSignIn = false
-        }
-    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -176,4 +189,44 @@ class ListFragment : Fragment() {
     }
 
 
+//    override fun onResume() {
+//        Log.e("hussain", "onResume: onResume", )
+//
+//        if (Firebase.auth.currentUser?.uid == null){
+//            isSignIn=true
+//        }else{
+//            Log.e("hussain", "onResume: else", )
+//            isSignIn=false
+//        }
+//        super.onResume()
+//    }
+
+
+    override fun onResume() {
+        super.onResume()
+        val currentUser = Firebase.auth.currentUser
+        if (currentUser != null) {
+            isSignIn = true
+            Log.e("TAG", "onResume2:$isSignIn ", )
+
+        }else{
+            isSignIn=false
+        }
+        update()
+
+
+
+        Log.e("TAG1", "onresume: $isSignIn")
+
+    }
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        Log.e("hussain", "onPrepareOptionsMenu: here $isSignIn")
+        if (isSignIn) {
+            menu.findItem(R.id.sign_in).isVisible = false
+            menu.findItem(R.id.sign_out).isVisible = true
+        } else {
+            menu.findItem(R.id.sign_out).isVisible = false
+            menu.findItem(R.id.sign_in).isVisible = true
+        }
+    }
 }

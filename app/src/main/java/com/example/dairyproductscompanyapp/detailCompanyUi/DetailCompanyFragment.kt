@@ -22,12 +22,11 @@ import com.google.firebase.ktx.Firebase
 
 
 class DetailCompanyFragment : Fragment() {
-    private var _binding:FragmentDetailCompanyBinding?=null
+    private var _binding: FragmentDetailCompanyBinding? = null
     private val binding get() = _binding
-    private val navigationArgs:DetailCompanyFragmentArgs by navArgs()
-    private val viewModel:DetailViewModel by activityViewModels()
+    private val navigationArgs: DetailCompanyFragmentArgs by navArgs()
+    private val viewModel: DetailViewModel by activityViewModels()
     private val userid = Firebase.auth.currentUser?.uid
-
 
 
     override fun onCreateView(
@@ -35,16 +34,15 @@ class DetailCompanyFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentDetailCompanyBinding.inflate(inflater , container , false)
+        _binding = FragmentDetailCompanyBinding.inflate(inflater, container, false)
         return binding?.root
     }
-
-
 
 
     @SuppressLint("CheckResult")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding?.viewModel = viewModel
         binding?.lifecycleOwner = viewLifecycleOwner
         binding.apply {
@@ -57,23 +55,29 @@ class DetailCompanyFragment : Fragment() {
                 .into(this.imageCompanyDetail)
         }
 
-binding?.plusOne?.setOnClickListener {
-    viewModel.quantityplus()
-}
+        binding?.plusOne?.setOnClickListener {
+            viewModel.quantityplus()
+        }
         binding?.minusOne?.setOnClickListener {
             viewModel.quantitydecrease()
         }
         binding?.orderButton?.setOnClickListener {
             if (viewModel.quantity.value!! > 0) {
-                val action =
-                    DetailCompanyFragmentDirections.actionDetailCompanyFragmentToOrderProductCompanyFragment(
-                        viewModel.quantity.value!!.toInt(),
-                        navigationArgs.namecompany,
-                        navigationArgs.nameproduct,
-                        navigationArgs.price,
-                        navigationArgs.id
-                    )
-                findNavController().navigate(action)
+                if (userid != null) {
+                    val action =
+                        DetailCompanyFragmentDirections.actionDetailCompanyFragmentToOrderProductCompanyFragment(
+                            viewModel.quantity.value!!.toInt(),
+                            navigationArgs.namecompany,
+                            navigationArgs.nameproduct,
+                            navigationArgs.price,
+                            navigationArgs.id,
+                            navigationArgs.refrance
+                        )
+                    findNavController().navigate(action)
+                } else {
+                    Toast.makeText(context, getString(R.string.toast_sign_in), Toast.LENGTH_SHORT)
+                        .show()
+                }
             }
 
         }
@@ -86,13 +90,13 @@ binding?.plusOne?.setOnClickListener {
                         navigationArgs.image,
                         navigationArgs.nameproduct,
                         navigationArgs.price,
-                        navigationArgs.id , navigationArgs.refrance)
+                        navigationArgs.id, navigationArgs.refrance
+                    )
                 findNavController().navigate(action)
             }
-        } else{
-            binding?.editButton?.visibility=View.INVISIBLE
+        } else {
+            binding?.editButton?.visibility = View.INVISIBLE
         }
-
 
 
     }
@@ -101,8 +105,4 @@ binding?.plusOne?.setOnClickListener {
         super.onDestroyView()
         _binding = null
     }
-
-
-
-
 }

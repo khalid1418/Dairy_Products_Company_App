@@ -1,5 +1,7 @@
 package com.example.dairyproductscompanyapp.orderProduct
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -7,7 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.dairyproductscompanyapp.R
@@ -18,6 +22,7 @@ import com.example.dairyproductscompanyapp.utils.ViewModelFactory
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.isActive
 
 
 class OrderProductCompanyFragment : Fragment() {
@@ -30,14 +35,21 @@ class OrderProductCompanyFragment : Fragment() {
     private val userid = Firebase.auth.currentUser?.uid
 
 fun addOrder(){
-    viewModel.addNewOrder(
-        binding?.quantity?.text.toString(),
-        userid.toString(),
-        navigationArgs2.id
 
-    )
-    val action = OrderProductCompanyFragmentDirections.actionOrderProductCompanyFragmentToListFragment()
-    findNavController().navigate(action)
+        viewModel.addNewOrder(
+            binding?.quantity?.text.toString(),
+            userid.toString(),
+            navigationArgs2.id,
+            navigationArgs2.refrence,
+            navigationArgs2.nameproduct,
+            navigationArgs2.price
+
+        )
+        Log.e("TAG", "addOrder:${navigationArgs2.price} ")
+        val action =
+            OrderProductCompanyFragmentDirections.actionOrderProductCompanyFragmentToListFragment()
+        findNavController().navigate(action)
+
 
 }
 
@@ -68,13 +80,27 @@ fun addOrder(){
         super.onViewCreated(view, savedInstanceState)
         binding?.nameCompany?.text = navigationArgs2.namecompany
         binding?.nameProduct?.text = navigationArgs2.nameproduct
-        binding?.price?.text=navigationArgs2.price.toString()
+        binding?.price?.text=navigationArgs2.price
         binding?.quantity?.text=navigationArgs2.quantity.toString()
 
-
         binding?.send?.setOnClickListener {
-         showConfirmationDialog()
+            if (viewModel.longtitude.value?.toDouble() == null){
+                Toast.makeText(context, "pleases pick location", Toast.LENGTH_SHORT).show()
+            }else{
+                showConfirmationDialog()
+            }
+        }
+        binding?.location?.setOnClickListener {
+            val action = OrderProductCompanyFragmentDirections.actionOrderProductCompanyFragmentToMapsFragment()
+            findNavController().navigate(action)
+
         }
 
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
     }
 }

@@ -31,10 +31,9 @@ class AddFragment : Fragment() {
 
     private var _binding: FragmentAddBinding? = null
     private val binding get() = _binding
-    private val REQUEST_CODE = 100
     lateinit var fileImage: Uri
     val userId = Firebase.auth.currentUser?.uid
-
+    private val REQUEST_CODE = 100
 
 
     private fun openGalleryForImage() {
@@ -44,6 +43,7 @@ class AddFragment : Fragment() {
 
 
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -77,6 +77,7 @@ class AddFragment : Fragment() {
         }
 
 
+
     }
 
     private fun addNewProduct() {
@@ -87,9 +88,8 @@ class AddFragment : Fragment() {
                 binding?.editNameCompany?.text.toString(),
                 binding?.editPhoneNumber1?.text.toString(),
                 binding?.editNameProduct?.text.toString(),
-                binding?.price?.text.toString(),
-                 "",fileImage ,
-                userId!!
+                binding?.priceAdd?.text.toString(),
+                 "",fileImage ,userId!!
 
             )
             val action = AddFragmentDirections.actionAddFragmentToListFragment()
@@ -103,7 +103,7 @@ class AddFragment : Fragment() {
             binding?.editNameCompany?.text.toString(),
             binding?.editPhoneNumber1?.text.toString(),
             binding?.editNameProduct?.text.toString(),
-            binding?.price?.text.toString(),
+            binding?.priceAdd?.text.toString(),
             binding?.imageCompany.toString()
         )
     }

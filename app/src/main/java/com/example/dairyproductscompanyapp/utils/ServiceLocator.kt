@@ -2,10 +2,7 @@ package com.example.dairyproductscompanyapp.utils
 
 import com.example.dairyproductscompanyapp.dataLayer.CompanyFireStoreDataSource
 import com.example.dairyproductscompanyapp.dataLayer.CompanyRepository
-import com.example.dairyproductscompanyapp.domain.AddUseCase
-import com.example.dairyproductscompanyapp.domain.EditProductUseCase
-import com.example.dairyproductscompanyapp.domain.OrderAddProductUseCase
-import com.example.dairyproductscompanyapp.domain.RetrieveUseCase
+import com.example.dairyproductscompanyapp.domain.*
 import com.google.firebase.firestore.FirebaseFirestore
 
 
@@ -24,3 +21,11 @@ fun providerUseCaseRetrieveCompany(): RetrieveUseCase = RetrieveUseCase(provider
 fun providerUseCaseAddOrder():OrderAddProductUseCase = OrderAddProductUseCase(
     providerCompanyRepository())
 fun providerUseCaseEditProduct():EditProductUseCase = EditProductUseCase(providerCompanyRepository())
+fun providerUseCaseRetrieveOrderBuyer():RetrieveOrderBuyerUseCase = RetrieveOrderBuyerUseCase(
+    providerCompanyRepository())
+fun providerUseCaseDeleteOrder():DeleteOrderDoneUseCase = DeleteOrderDoneUseCase(
+    providerCompanyRepository())
+
+fun providerUseCaseEditProfile():EditProfileUseCase = EditProfileUseCase(providerCompanyRepository())
+fun providerGetUserInfo():GetUserInfoUseCase = GetUserInfoUseCase(providerCompanyRepository())
+fun providerAddUserInfo():AddProfileUseCase = AddProfileUseCase(providerCompanyRepository())

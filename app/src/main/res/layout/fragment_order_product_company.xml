@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/istockphoto_1153938533_170667a"
     tools:context=".orderProduct.OrderProductCompanyFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,10 +16,10 @@
             android:layout_width="206dp"
             android:layout_height="47dp"
             android:layout_marginBottom="356dp"
+            android:text="NameProduct"
+            android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="20dp"
-            android:textAlignment="center"
-            android:text="NameProduct"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -51,9 +52,9 @@
             android:id="@+id/quantity"
             android:layout_width="61dp"
             android:layout_height="43dp"
-            android:text="Quantity"
-            android:textSize="15dp"
+            android:text="@string/quantity"
             android:textColor="@color/black"
+            android:textSize="15dp"
             app:layout_constraintStart_toEndOf="@+id/price"
             app:layout_constraintTop_toTopOf="@+id/price" />
 
@@ -65,6 +66,45 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="206dp"
+            android:layout_height="39dp"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:text="@string/name_product"
+            app:layout_constraintBottom_toTopOf="@+id/name_product"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="93dp"
+            android:layout_height="37dp"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:text="@string/price"
+            app:layout_constraintBottom_toTopOf="@+id/price"
+            app:layout_constraintStart_toEndOf="@+id/textView5" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="85dp"
+            android:layout_height="38dp"
+            android:text="@string/quantity"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/quantity"
+            app:layout_constraintStart_toEndOf="@+id/textView6" />
+
+        <Button
+            android:id="@+id/location"
+            android:layout_width="261dp"
+            android:layout_height="54dp"
+            android:text="Location"
+            app:layout_constraintBottom_toTopOf="@+id/send"
+            app:layout_constraintEnd_toEndOf="@+id/send"
+            app:layout_constraintStart_toStartOf="@+id/send" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

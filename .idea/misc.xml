@@ -3,18 +3,39 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.14322916666666666" />
         <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/drawable-v24/loading_img.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.14322916666666666" />
         <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.2212962962962963" />
-        <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/layout/activity_main.xml" value="0.17300724637681159" />
-        <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/layout/company_list.xml" value="0.4982142857142857" />
+        <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.14322916666666666" />
+        <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/drawable/ic_baseline_logout_24.xml" value="0.14322916666666666" />
+        <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/drawable/ic_baseline_my_location_24.xml" value="0.14322916666666666" />
+        <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/drawable/ic_baseline_send_24.xml" value="0.14322916666666666" />
+        <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.14322916666666666" />
+        <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.14322916666666666" />
+        <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/layout/activity_main2.xml" value="0.12708333333333333" />
+        <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/layout/activity_splash_screen.xml" value="0.21920289855072464" />
+        <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/layout/company_list.xml" value="0.176" />
+        <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/layout/firebase_notification.xml" value="0.2" />
         <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/layout/fragment_add.xml" value="0.264" />
         <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/layout/fragment_detail.xml" value="0.24320652173913043" />
         <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/layout/fragment_detail_company.xml" value="0.264" />
-        <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/layout/fragment_edit_product.xml" value="0.23867753623188406" />
+        <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/layout/fragment_edit_product.xml" value="0.264" />
+        <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/layout/fragment_edit_profile.xml" value="0.34875" />
+        <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/layout/fragment_first.xml" value="0.2164855072463768" />
         <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/layout/fragment_list.xml" value="0.2" />
-        <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/layout/fragment_order_product_company.xml" value="0.4" />
+        <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/layout/fragment_maps.xml" value="0.23007246376811594" />
+        <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/layout/fragment_order_list.xml" value="0.2341485507246377" />
+        <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/layout/fragment_order_product_company.xml" value="0.264" />
+        <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/layout/fragment_profile.xml" value="0.2" />
         <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/layout/fragment_registration.xml" value="0.16799999999999998" />
+        <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/layout/order_list.xml" value="0.4" />
+        <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.264" />
         <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/menu/list_menu.xml" value="0.264" />
+        <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/menu/profile_menu.xml" value="0.25" />
+        <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/kaled/Desktop/DairyProductsCompanyApp/app/src/main/res/xml/root_preferences.xml" value="0.4359861591695502" />
       </map>
     </option>
   </component>

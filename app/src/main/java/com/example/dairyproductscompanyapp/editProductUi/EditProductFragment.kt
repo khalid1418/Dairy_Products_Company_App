@@ -26,16 +26,15 @@ import com.google.firebase.ktx.Firebase
 
 
 class EditProductFragment() : Fragment() {
-    private var _binding:FragmentEditProductBinding? = null
+    private var _binding: FragmentEditProductBinding? = null
     private val binding get() = _binding
-    private val viewModel:EditProductViewModel by activityViewModels{
+    private val viewModel: EditProductViewModel by activityViewModels {
         ViewModelFactory()
     }
     val userId = Firebase.auth.currentUser?.uid
     private val navigationArgs3: EditProductFragmentArgs by navArgs()
     private val REQUEST_CODE = 100
-     var fileImage: Uri ="".toUri()
-
+    private var fileImage: Uri? = null
 
 
     private fun openGalleryForImage() {
@@ -45,6 +44,7 @@ class EditProductFragment() : Fragment() {
 
 
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE) {
@@ -55,13 +55,12 @@ class EditProductFragment() : Fragment() {
     }
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentEditProductBinding.inflate(inflater , container , false)
+        _binding = FragmentEditProductBinding.inflate(inflater, container, false)
         return binding?.root
     }
 
@@ -69,7 +68,7 @@ class EditProductFragment() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         bind()
         binding?.imageCompany?.setOnClickListener {
-//            openGalleryForImage()
+            openGalleryForImage()
 
         }
         binding?.SaveProduct?.setOnClickListener {
@@ -77,14 +76,17 @@ class EditProductFragment() : Fragment() {
         }
     }
 
-    private fun bind(){
+    private fun bind() {
         val price = navigationArgs3.price.toString()
         binding?.apply {
-            editNameCompany.setText(navigationArgs3.namecompany , TextView.BufferType.SPANNABLE)
-            editPhoneNumber1.setText(navigationArgs3.phone.toString() , TextView.BufferType.SPANNABLE)
-            editNameProduct.setText(navigationArgs3.nameproduct , TextView.BufferType.SPANNABLE)
+            editNameCompany.setText(navigationArgs3.namecompany, TextView.BufferType.SPANNABLE)
+            editPhoneNumber1.setText(
+                navigationArgs3.phone.toString(),
+                TextView.BufferType.SPANNABLE
+            )
+            editNameProduct.setText(navigationArgs3.nameproduct, TextView.BufferType.SPANNABLE)
             priceEdit.setText(price, TextView.BufferType.SPANNABLE)
-                Glide.with(imageCompany).load(navigationArgs3.image).into(imageCompany)
+            Glide.with(imageCompany).load(navigationArgs3.image).into(imageCompany)
 
         }
 
@@ -100,7 +102,7 @@ class EditProductFragment() : Fragment() {
                 binding?.editPhoneNumber1?.text.toString(),
                 binding?.editNameProduct?.text.toString(),
                 binding?.priceEdit?.text.toString(),
-                navigationArgs3.image , userId!! , navigationArgs3.refrence
+                navigationArgs3.image, userId!!, navigationArgs3.refrence, fileImage
 
 
             )

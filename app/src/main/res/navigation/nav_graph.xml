@@ -8,19 +8,28 @@
     <fragment
         android:id="@+id/listFragment"
         android:name="com.example.dairyproductscompanyapp.listCompanyUi.ListFragment"
-        android:label="fragment_list"
-        tools:layout="@layout/fragment_list" >
+        android:label="Dairy"
+        tools:layout="@layout/fragment_list">
         <action
             android:id="@+id/action_listFragment_to_addFragment"
             app:destination="@id/addFragment" />
         <action
             android:id="@+id/action_listFragment_to_detailCompanyFragment"
             app:destination="@id/detailCompanyFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_orderListFragment"
+            app:destination="@id/orderListFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/addFragment"
         android:name="com.example.dairyproductscompanyapp.addCompanyUi.AddFragment"
-        android:label="fragment_add"
+        android:label="AddProduct"
         tools:layout="@layout/fragment_add" >
         <action
             android:id="@+id/action_addFragment_to_listFragment"
@@ -29,7 +38,7 @@
     <fragment
         android:id="@+id/detailCompanyFragment"
         android:name="com.example.dairyproductscompanyapp.detailCompanyUi.DetailCompanyFragment"
-        android:label="fragment_detail_company"
+        android:label="DetailCompany"
         tools:layout="@layout/fragment_detail_company" >
         <argument
             android:name="namecompany"
@@ -42,7 +51,7 @@
             app:argType="string" />
         <argument
             android:name="price"
-            app:argType="integer" />
+            app:argType="string" />
         <argument
             android:name="image"
             app:argType="string" />
@@ -62,7 +71,7 @@
     <fragment
         android:id="@+id/orderProductCompanyFragment"
         android:name="com.example.dairyproductscompanyapp.orderProduct.OrderProductCompanyFragment"
-        android:label="fragment_order_product_company"
+        android:label="InvoicePage"
         tools:layout="@layout/fragment_order_product_company" >
         <argument
             android:name="quantity"
@@ -74,18 +83,24 @@
             app:argType="string" />
         <argument
             android:name="price"
-            app:argType="integer" />
+            app:argType="string" />
         <argument
             android:name="id"
             app:argType="string" />
         <action
             android:id="@+id/action_orderProductCompanyFragment_to_listFragment"
             app:destination="@id/listFragment" />
+        <argument
+            android:name="refrence"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_orderProductCompanyFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
     </fragment>
     <fragment
         android:id="@+id/editProductFragment"
         android:name="com.example.dairyproductscompanyapp.editProductUi.EditProductFragment"
-        android:label="fragment_edit_product"
+        android:label="EditProduct"
         tools:layout="@layout/fragment_edit_product" >
         <argument
             android:name="namecompany"
@@ -101,7 +116,7 @@
             app:argType="string" />
         <argument
             android:name="price"
-            app:argType="integer" />
+            app:argType="string" />
         <argument
             android:name="userId"
             app:argType="string" />
@@ -110,6 +125,52 @@
             app:destination="@id/listFragment" />
         <argument
             android:name="refrence"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderListFragment"
+        android:name="com.example.dairyproductscompanyapp.orderListUi.OrderListFragment"
+        android:label="OrdersPage"
+        tools:layout="@layout/fragment_order_list" />
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.example.dairyproductscompanyapp.utils.MapsFragment"
+        android:label="Maps"
+        tools:layout="@layout/fragment_maps" >
+        <action
+            android:id="@+id/action_mapsFragment_to_orderProductCompanyFragment"
+            app:destination="@id/orderProductCompanyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.dairyproductscompanyapp.utils.SettingsFragment"
+        android:label="Setting" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.dairyproductscompanyapp.profileUserUi.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.example.dairyproductscompanyapp.editProfileUi.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" >
+        <action
+            android:id="@+id/action_editProfileFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <argument
+            android:name="username"
+            app:argType="string" />
+        <argument android:name="email"
+            app:argType="string" />
+        <argument android:name="date"
+            app:argType="string" />
+        <argument
+            android:name="image"
             app:argType="string" />
     </fragment>
 </navigation>
