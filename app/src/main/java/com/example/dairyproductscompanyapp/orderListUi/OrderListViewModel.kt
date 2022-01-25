@@ -28,6 +28,7 @@ class OrderListViewModel(
     val orderLiveData = product.asLiveData()
 
     init {
+
         retrieveOrderCompany()
     }
 

@@ -1,6 +1,8 @@
 package com.example.dairyproductscompanyapp.listCompanyUi
 
 import android.app.Activity
+import android.app.PendingIntent
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -20,15 +22,16 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import java.text.NumberFormat
+import android.os.Build
+
+
+
 
 
 class ListFragment : Fragment() {
     private var _binding: FragmentListBinding? = null
     private val binding get() = _binding
     var menu123: Menu ?= null
-
-
-
     var isSignIn: Boolean = true
 
     private val viewModel: ListCompanyViewModel by activityViewModels {
@@ -51,6 +54,8 @@ class ListFragment : Fragment() {
         .setAvailableProviders(providers)
         .build()
 
+
+
     private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
         val response = result.idpResponse
 
@@ -59,22 +64,13 @@ class ListFragment : Fragment() {
             viewModel.addProfile(UserProfile(user?.displayName.toString(), user?.email.toString()))
             isSignIn = true
 
-            // ...
         } else {
-            // Sign in failed. If response is null the user canceled the
-            // sign-in flow using the back button. Otherwise check
-            // response.getError().getErrorCode() and handle the error.
-            // ...
+
+
         }
     }
 
-    private fun checkUserSignIn() {
-        if (!isSignIn) {
-            findNavController().navigate(R.id.action_listFragment_to_addFragment)
-        } else {
-            Toast.makeText(requireContext(), "You not sign in", Toast.LENGTH_SHORT).show()
-        }
-    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -140,7 +136,10 @@ class ListFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.sign_in -> {
-                signInLauncher.launch(signInIntent)
+
+        signInLauncher.launch(signInIntent)
+
+
 
             }
             R.id.sign_out -> {
@@ -154,12 +153,7 @@ class ListFragment : Fragment() {
                     }
                 isSignIn = true
             }
-//            R.id.order_buyer -> {
-//                findNavController().navigate(R.id.action_listFragment_to_orderListFragment)
-//            }
-//            R.id.settingsFragment -> {
-//                findNavController().navigate(R.id.action_listFragment_to_settingsFragment)
-//            }
+
         }
         return true
     }
@@ -189,17 +183,7 @@ class ListFragment : Fragment() {
     }
 
 
-//    override fun onResume() {
-//        Log.e("hussain", "onResume: onResume", )
-//
-//        if (Firebase.auth.currentUser?.uid == null){
-//            isSignIn=true
-//        }else{
-//            Log.e("hussain", "onResume: else", )
-//            isSignIn=false
-//        }
-//        super.onResume()
-//    }
+
 
 
     override fun onResume() {
@@ -207,7 +191,7 @@ class ListFragment : Fragment() {
         val currentUser = Firebase.auth.currentUser
         if (currentUser != null) {
             isSignIn = true
-            Log.e("TAG", "onResume2:$isSignIn ", )
+            Log.e("TAG", "onResume2:$isSignIn ")
 
         }else{
             isSignIn=false

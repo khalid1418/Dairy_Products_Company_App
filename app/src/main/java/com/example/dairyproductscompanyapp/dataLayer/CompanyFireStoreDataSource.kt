@@ -31,8 +31,8 @@ class CompanyFireStoreDataSource(
             Log.e("TAG", "uri :: $it")
             val db = firebaseFirestore
             product.image = it.toString()
-            var path = db.collection("product").document()
-            var id = path.id
+            val path = db.collection("product").document()
+            val id = path.id
             product.reference = id
 
             Log.e("TAG", "addProduct:${product.reference} ")
@@ -102,7 +102,7 @@ class CompanyFireStoreDataSource(
     override suspend fun sendOrderProduct(product: OrderDataModel) {
         val db = firebaseFirestore
        val path =  db.collection("order").document()
-               var id = path.id
+               val id = path.id
         product.document=id
 
             path.set(product)
@@ -237,12 +237,6 @@ awaitClose {  }
             .addOnFailureListener {
                 Log.e("TAG", "addProfile: $it", )
             }
-    }
-    companion object{
-        const val PROFILE = "PROFILE"
-        const val USERNAME = "userName"
-        const val USEREMAIL = "userEmail"
-
     }
 
 }

@@ -60,10 +60,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth-ktx:21.0.1'
     implementation platform('com.google.firebase:firebase-bom:29.0.3')
     implementation 'com.google.firebase:firebase-analytics-ktx'
-    implementation 'com.firebaseui:firebase-ui-auth:7.2.0'
+    implementation 'com.firebaseui:firebase-ui-auth:8.0.0'
     implementation 'com.google.firebase:firebase-firestore-ktx:24.0.0'
     implementation 'com.google.firebase:firebase-storage-ktx:20.0.0'
-    implementation 'com.google.android.gms:play-services-maps:18.0.1'
+    implementation 'com.google.android.gms:play-services-maps:18.0.2'
     implementation 'androidx.preference:preference:1.1.1'
     implementation 'com.google.firebase:firebase-messaging-ktx:23.0.0'
     testImplementation 'junit:junit:4.+'
@@ -85,14 +85,19 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0-native-mt"
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     // Dependency to include Maps SDK for Android
-    implementation 'com.google.android.gms:play-services-maps:18.0.1'
+    implementation 'com.google.android.gms:play-services-maps:18.0.2'
     implementation 'com.google.firebase:firebase-messaging'
 
+
+
 // Maps SDK for Android KTX Library
-    implementation 'com.google.maps.android:maps-ktx:3.0.0'
+    implementation 'com.google.maps.android:maps-ktx:3.3.0'
 
 // Maps SDK for Android Utility Library KTX Library
-    implementation 'com.google.maps.android:maps-utils-ktx:3.0.0'
+    implementation 'com.google.maps.android:maps-utils-ktx:3.3.0'
+
+    implementation 'androidx.work:work-runtime:2.7.1'
+
 
 }
 apply plugin: 'com.android.application'

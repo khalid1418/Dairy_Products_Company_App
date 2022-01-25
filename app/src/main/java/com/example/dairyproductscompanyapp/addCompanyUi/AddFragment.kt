@@ -31,7 +31,7 @@ class AddFragment : Fragment() {
 
     private var _binding: FragmentAddBinding? = null
     private val binding get() = _binding
-    lateinit var fileImage: Uri
+    private var fileImage: Uri? = null
     val userId = Firebase.auth.currentUser?.uid
     private val REQUEST_CODE = 100
 
@@ -89,7 +89,7 @@ class AddFragment : Fragment() {
                 binding?.editPhoneNumber1?.text.toString(),
                 binding?.editNameProduct?.text.toString(),
                 binding?.priceAdd?.text.toString(),
-                 "",fileImage ,userId!!
+                 "",fileImage!! ,userId!!
 
             )
             val action = AddFragmentDirections.actionAddFragmentToListFragment()
@@ -104,7 +104,9 @@ class AddFragment : Fragment() {
             binding?.editPhoneNumber1?.text.toString(),
             binding?.editNameProduct?.text.toString(),
             binding?.priceAdd?.text.toString(),
-            binding?.imageCompany.toString()
+            binding?.imageCompany.toString(),
+            fileImage
+
         )
     }
     override fun onDestroyView() {

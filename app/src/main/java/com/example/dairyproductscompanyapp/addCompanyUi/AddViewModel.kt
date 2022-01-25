@@ -53,9 +53,9 @@ class AddViewModel(private val addUseCase: AddUseCase) : ViewModel() {
         phone: String,
         nameProduct: String,
         price: String,
-        imageView: String,
+        imageView: String,image: Uri?
     ): Boolean {
-        if (name.isBlank() || phone.isBlank() || nameProduct.isBlank() || price.isBlank() || imageView.isBlank()) {
+        if (name.isBlank() || phone.isBlank() || nameProduct.isBlank() || price.isBlank() || imageView.isBlank() || image == null) {
             return false
         }
         return true

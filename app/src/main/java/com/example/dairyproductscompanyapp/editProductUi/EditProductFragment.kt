@@ -77,7 +77,7 @@ class EditProductFragment() : Fragment() {
     }
 
     private fun bind() {
-        val price = navigationArgs3.price.toString()
+        val price = navigationArgs3.price
         binding?.apply {
             editNameCompany.setText(navigationArgs3.namecompany, TextView.BufferType.SPANNABLE)
             editPhoneNumber1.setText(
